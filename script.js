@@ -2,6 +2,7 @@
 import { keys } from "./keys.js";
 
 
+/* ZIP CODE FUNCTIONS */
 let zip = "";
 const zip_input = document.getElementById('zip');
 zip_input.addEventListener('input', zipTest);
@@ -29,6 +30,10 @@ function zipTest(e) {
     }
 }
 
+
+
+/* WEATHER RETRIEVAL AND PARSING FUNCTIONS */
+
 function getWeather(k, z) {
     let toFetch = "https://api.openweathermap.org/data/2.5/weather?zip=" + z + ",us&appid=" + k;
     console.log(toFetch);
@@ -41,6 +46,46 @@ function getWeather(k, z) {
     // });
 }
 
+
+
+/* TWO WAY DATA BINDING FUNCTIONS */
+
+const createState = (state) => {
+    return new Proxy(state, {
+        set(target, property, value) {
+            target[property] = value;
+            render();
+            return true;
+        }
+    });
+};
+
+const state = createState({
+    name: 'Francesco',
+    title: 'Front-end Developer'
+});
+
+const listeners = document.querySelectorAll('[data-model]');
+
+listeners.forEach((listener) => {
+    const name = listener.dataset.model;
+    listener.addEventListener('keyup', (event) => {
+        state[name] = listener.value;
+    });
+});
+
+
+const render = () => {
+    const bindings = Array.from(document.querySelectorAll('[data-binding]')).map(
+        e => e.dataset.binding
+    );
+    bindings.forEach((binding) => {
+        document.querySelector(`[data-binding='${binding}']`).innerHTML = state[binding];
+        document.querySelector(`[data-model='${binding}']`).value = state[binding];
+    });
+};
+
+render();
 
 
 /* HELPER FUNCTIONS */
