@@ -126,7 +126,7 @@ const state = createState({
     now_wind_speed: "",
     now_wind_degree: "",
     now_cloud_cover: "",
-    /*
+
     now_rain: "",
     now_snow: "",
 
@@ -204,7 +204,7 @@ const state = createState({
     day_5_wind_speed: "",
     day_5_wind_degree: "",
     day_5_cloud_cover: "",
-    */
+
 });
 
 const listeners = document.querySelectorAll('[data-model]');
