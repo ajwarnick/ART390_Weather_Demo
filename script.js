@@ -35,31 +35,65 @@ function zipTest(e) {
 /* WEATHER RETRIEVAL AND PARSING FUNCTIONS */
 
 function getWeather(k, z) {
-    let toFetch = "https://api.openweathermap.org/data/2.5/weather?zip=" + z + ",us&appid=" + k;
-    console.log(toFetch);
-    fetch(toFetch)
+    let toFetchCurrent = "https://api.openweathermap.org/data/2.5/weather?zip=" + z + ",us&appid=" + k;
+    let toFetchForecast = "https://api.openweathermap.org/data/2.5/forecast/daily?zip=" + z + ",us&appid=" + k;
+
+    console.log(toFetchCurrent);
+    fetch(toFetchCurrent)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (myJson) {
+            mapCurrentResultsToState(myJson);
+        });
+
+    fetch(toFetchForecast)
         .then(function (response) {
             return response.json();
         })
         .then(function (myJson) {
             console.log(myJson);
-            //mapResultsToState(myJson);
+            //mapForecastResultsToState(myJson);
         });
 }
 
 
-function mapResultsToState(j) {
-    // state["now_description_main"] = j.weather.main;
-    // state["now_description_long"] = j.weather.description;
-    // state["now_description_icon"] = j.weather.icon;
+function mapCurrentResultsToState(j) {
+    if (j.cod === "404") {
+        state["error"] = j.message;
+    } else {
+        state["now_description_main"] = j.weather[0].main;
+        state["now_description_long"] = j.weather[0].description;
+        state["now_description_icon"] = j.weather[0].icon;
 
-    // state["now_temp_current"] = kelvinToFahrenheit(j.main.temp);
-    // state["now_temp_high"] = kelvinToFahrenheit(j.main.temp_max);
-    // state["now_temp_low"] = kelvinToFahrenheit(j.main.temp_min);
+        state["now_temp_current"] = kelvinToFahrenheit(j.main.temp);
+        //state["now_temp_high"] = kelvinToFahrenheit(j.main.temp_max);
+        //state["now_temp_low"] = kelvinToFahrenheit(j.main.temp_min);
 
-    // state["now_wind_speed"] = j.wind.speed;
-    // state["now_wind_degree"] = j.wind.deg;
-    // state["now_cloud_cover"] = j.clouds.all;
+        state["now_wind_speed"] = j.wind.speed;
+        state["now_wind_degree"] = j.wind.deg;
+        state["now_cloud_cover"] = j.clouds.all;
+    }
+}
+
+
+function mapForecastResultsToState(j) {
+    if (j.cod === "404") {
+        state["error"] = j.message;
+    } else {
+        state["now_description_main"] = j.list[0].main;
+        state["day_0_description_main"] = j.list[0];
+        state["day_0_description_long"] = j.list[0];
+        state["day_0_description_icon"] = j.list[0];
+
+        state["day_0_temp_current"] = j.list[0];
+        state["day_0_temp_high"] = j.list[0];
+        state["day_0_temp_low"] = j.list[0];
+
+        state["day_0_wind_speed"] = j.list[0];
+        state["day_0_wind_degree"] = j.list[0];
+        state["day_0_cloud_cover"] = j.list[0];
+    }
 }
 
 
@@ -75,25 +109,41 @@ const createState = (state) => {
     });
 };
 
-
 const state = createState({
-    now_description_main: "1",
-    now_description_long: "1",
-    now_description_icon: "1",
+    name: 'Francesco',
+    title: 'Front-end Developer',
 
-    now_temp_current: "1",
-    now_temp_high: "1",
-    now_temp_low: "1",
+    error: "",
 
-    now_wind_speed: "1",
-    now_wind_degree: "1",
-    now_cloud_cover: "1",
+    now_description_main: "",
+    now_description_long: "",
+    now_description_icon: "",
+
+    now_temp_current: "",
+    now_temp_high: "",
+    now_temp_low: "",
+
+    now_wind_speed: "",
+    now_wind_degree: "",
+    now_cloud_cover: "",
     /*
     now_rain: "",
     now_snow: "",
 
     sunrise: "",
     sunset: "",
+
+    day_0_description_main: "",
+    day_0_description_long: "",
+    day_0_description_icon: "",
+
+    day_0_temp_current: "",
+    day_0_temp_high: "",
+    day_0_temp_low: "",
+
+    day_0_wind_speed: "",
+    day_0_wind_degree: "",
+    day_0_cloud_cover: "",
 
     day_1_description_main: "",
     day_1_description_long: "",
@@ -157,7 +207,6 @@ const state = createState({
     */
 });
 
-
 const listeners = document.querySelectorAll('[data-model]');
 
 listeners.forEach((listener) => {
@@ -174,7 +223,7 @@ const render = () => {
     );
     bindings.forEach((binding) => {
         document.querySelector(`[data-binding='${binding}']`).innerHTML = state[binding];
-        document.querySelector(`[data-model='${binding}']`).value = state[binding];
+        //document.querySelector(`[data-model='${binding}']`).value = state[binding];
     });
 };
 
