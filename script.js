@@ -1,6 +1,6 @@
 'use strict';
 import { keys } from "./keys.js";
-
+import { moon } from "./moon.js";
 
 let zip = "";
 const zip_input = document.getElementById('zip');
@@ -32,6 +32,20 @@ function zipTest(e) {
 function getWeather(k, z) {
     let toFetch = "https://api.openweathermap.org/data/2.5/weather?zip=" + z + ",us&appid=" + k;
     console.log(toFetch);
+    // fetch(toFetch)
+    // .then(function(response) {
+    //     return response.json();
+    // })
+    // .then(function(myJson) {
+    //     console.log(myJson);
+    // });
+}
+
+function getUVIndex(k,lat, lon){
+    // http://api.openweathermap.org/data/2.5/uvi?appid="+k+"&lat="+lat+"&lon="+lon
+    let toFetch = "https://api.openweathermap.org/data/2.5/weather?zip=" + z + ",us&appid=" + k;
+    console.log(toFetch);
+
     // fetch(toFetch)
     // .then(function(response) {
     //     return response.json();

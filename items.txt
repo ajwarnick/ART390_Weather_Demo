@@ -32,6 +32,8 @@ Pressure
 Time
 Date
 Sunrise / Sunset
+Phase of Moon / Tide
+
 
 Forecast
 ---------------
@@ -48,3 +50,4 @@ Precipitation
 	Likelihood 
 
 Sunrise / Sunset	
+Phase of Moon / Tid
