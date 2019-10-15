@@ -1,10 +1,18 @@
 'use strict';
 import { keys } from "./keys.js";
-import { moon } from "./moon.js";
+//import { moon } from "./moon.js";
+
+let nws; 
+let hourly;
 
 let zip = "";
 const zip_input = document.getElementById('zip');
 zip_input.addEventListener('input', zipTest);
+
+// let lat = 40.75;
+// let lon = -73.92;
+let gridX;
+let gridY;
 
 if (getParameterByName('zip')) {
     zip = getParameterByName('zip');
@@ -55,7 +63,30 @@ function getUVIndex(k,lat, lon){
     // });
 }
 
+function getHourlyForcast( lat, lon ){
+    let toFetch = "https://api.weather.gov/points/" + lat + "," + lon;
+    fetch(toFetch)
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(myJson) {
+        nws = myJson;
+        gridX = nws.properties.gridX;
+        gridY = nws.properties.gridY;
 
+        // get hourly
+    }).then(function(){
+        let gridFetch = "https://api.weather.gov/gridpoints/TOP/"+gridX+","+gridY+"/forecast/hourly"
+        fetch(gridFetch).then(function(response) {
+            return response.json();
+        })
+        .then(function(myJson) {
+            hourly = myJson.properties.periods;
+        })
+    });
+}
+
+getHourlyForcast( 40.75, -73.92);
 
 /* HELPER FUNCTIONS */
 
