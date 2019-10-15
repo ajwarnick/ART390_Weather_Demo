@@ -677,7 +677,7 @@ function getLocalLanguage() {
  * Initialize the map.
  */
 function my_initMap( l1, l2, z1 ) {
-
+	console.log("bang");
 
 	var humanitarian = L.tileLayer('https://tile-{s}.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
 		maxZoom: 17,
