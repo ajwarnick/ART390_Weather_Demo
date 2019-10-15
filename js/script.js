@@ -1,6 +1,6 @@
 'use strict';
 import { keys } from "./keys.js";
-//import { moon } from "./moon.js";
+import { moon } from "./moon.js";
 
 let nws; 
 let hourly;
@@ -70,17 +70,17 @@ function mapCurrentResultsToState(j) {
     if (j.cod === "404") {
         state["error"] = j.message;
     } else {
-        state["now_description_main"] = j.weather[0].main;
-        state["now_description_long"] = j.weather[0].description;
-        state["now_description_icon"] = j.weather[0].icon;
+        state["current_description_main"] = j.weather[0].main;
+        state["current_description_long"] = j.weather[0].description;
+        state["current_description_icon"] = j.weather[0].icon;
 
-        state["now_temp_current"] = kelvinToFahrenheit(j.main.temp);
-        //state["now_temp_high"] = kelvinToFahrenheit(j.main.temp_max);
-        //state["now_temp_low"] = kelvinToFahrenheit(j.main.temp_min);
+        state["current_temp_current"] = kelvinToFahrenheit(j.main.temp);
+        //state["current_temp_high"] = kelvinToFahrenheit(j.main.temp_max);
+        //state["current_temp_low"] = kelvinToFahrenheit(j.main.temp_min);
 
-        state["now_wind_speed"] = j.wind.speed;
-        state["now_wind_degree"] = j.wind.deg;
-        state["now_cloud_cover"] = j.clouds.all;
+        state["current_wind_speed"] = j.wind.speed;
+        state["current_wind_degree"] = j.wind.deg;
+        state["current_cloud_cover"] = j.clouds.all;
     }
 }
 
@@ -108,12 +108,26 @@ function getHourlyForcast( lat, lon ){
         nws = myJson;
         gridX = nws.properties.gridX;
         gridY = nws.properties.gridY;
+		// get hourly
+    }).then(function(){
+        let gridFetch = "https://api.weather.gov/gridpoints/TOP/"+gridX+","+gridY+"/forecast/hourly"
+        fetch(gridFetch).then(function(response) {
+            return response.json();
+        })
+        .then(function(myJson) {
+            hourly = myJson.properties.periods;
+        })
+    });
+}
+
+getHourlyForcast( 40.75, -73.92);
+
 
 function mapForecastResultsToState(j) {
     if (j.cod === "404") {
         state["error"] = j.message;
     } else {
-        state["now_description_main"] = j.list[0].main;
+        state["current_description_main"] = j.list[0].main;
         state["day_0_description_main"] = j.list[0];
         state["day_0_description_long"] = j.list[0];
         state["day_0_description_icon"] = j.list[0];
@@ -144,26 +158,42 @@ const createState = (state) => {
 const state = createState({
     name: 'Francesco',
     title: 'Front-end Developer',
+	location: {
+		zip: "",
+		lat: "",
+		lon: "",
+		name: ""
+	},
+	error: "",
+	
+	current: {
+		description_main: "",
+		description_long: "",
+		description_icon: "",
 
-    error: "",
+		temp_current: "",
+		temp_high: "",
+		temp_low: "",
 
-    now_description_main: "",
-    now_description_long: "",
-    now_description_icon: "",
+		wind_speed: "",
+		wind_degree: "",
+		cloud_cover: "",
 
-    now_temp_current: "",
-    now_temp_high: "",
-    now_temp_low: "",
+		rain: "",
+		snow: "",
 
-    now_wind_speed: "",
-    now_wind_degree: "",
-    now_cloud_cover: "",
+		sunrise: "",
+		sunset: "",
+	},
 
-    now_rain: "",
-    now_snow: "",
+	hourly: {
 
-    sunrise: "",
-    sunset: "",
+	},
+
+	forecast: {
+
+	},
+    
 
     day_0_description_main: "",
     day_0_description_long: "",
@@ -260,19 +290,9 @@ const render = () => {
 };
 
 render();
-        // get hourly
-    }).then(function(){
-        let gridFetch = "https://api.weather.gov/gridpoints/TOP/"+gridX+","+gridY+"/forecast/hourly"
-        fetch(gridFetch).then(function(response) {
-            return response.json();
-        })
-        .then(function(myJson) {
-            hourly = myJson.properties.periods;
-        })
-    });
-}
+        
 
-getHourlyForcast( 40.75, -73.92);
+
 
 /* HELPER FUNCTIONS */
 

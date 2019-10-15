@@ -7,17 +7,16 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Weather</title>
 
-        <link rel="stylesheet" href="/leaflet/leaflet.css" />
-        <link rel="stylesheet" href="/leaflet/leaflet-openweathermap.css" />
-        <link rel="stylesheet" href="/leaflet/leaflet-languageselector.css" />
+        <link rel="stylesheet" href="/js/libraries/leaflet/leaflet.css" />
+        <link rel="stylesheet" href="/js/libraries/leaflet/leaflet-openweathermap.css" />
+        <link rel="stylesheet" href="/js/libraries/leaflet/leaflet-languageselector.css" />
 
-        <script src="/leaflet/leaflet.js"></script>
-        <script src="/leaflet/Permalink.js"></script>
-        <script src="/leaflet/Permalink.Layer.js"></script>
-        <script src="/leaflet/Permalink.Overlay.js"></script>
-        <script src="/leaflet/leaflet-openweathermap.js"></script>
-        <script src="/leaflet/leaflet-languageselector.js"></script>
-
+        <script src="/js/libraries/leaflet/leaflet.js"></script>
+        <script src="/js/libraries/leaflet/Permalink.js"></script>
+        <script src="/js/libraries/leaflet/Permalink.Layer.js"></script>
+        <script src="/js/libraries/leaflet/Permalink.Overlay.js"></script>
+        <script src="/js/libraries/leaflet/leaflet-openweathermap.js"></script>
+        <script src="/js/libraries/leaflet/leaflet-languageselector.js"></script>
 
 
         <link rel="stylesheet" href="/style.css">
@@ -28,33 +27,17 @@
         <input placeholder="Enter Your ZIP Code" name="name" id="zip" />
         <p id="zip_display"></p>
         <p data-binding="error"></p>
-        <!--
-        <div class="field">
-            <label for="name">Enter your name:</label>
-            <input id="name" type="text" name="name" data-model="name" />
-        </div>
-
-        <div class="field">
-            <label for="title">Enter your title:</label>
-            <input id="title" type="text" name="title" data-model="title" />
-        </div>
 
         <div class="results">
-            <h1 data-binding="name"></h1>
-            <h2 data-binding="title"></h2>
-        </div>
-        -->
-
-        <div class="results">
-            <h1 data-binding="now_description_main"></h1>
-            <h1 data-binding="now_description_long"></h1>
-            <h1 data-binding="now_description_icon"></h1>
-            <h1 data-binding="now_temp_current"></h1>
-            <h1 data-binding="now_temp_high"></h1>
-            <h1 data-binding="now_temp_low"></h1>
-            <h1 data-binding="now_wind_speed"></h1>
+            <h1 data-binding="current_description_main"></h1>
+            <h1 data-binding="current_description_long"></h1>
+            <h1 data-binding="current_description_icon"></h1>
+            <h1 data-binding="current_temp_current"></h1>
+            <h1 data-binding="current_temp_high"></h1>
+            <h1 data-binding="current_temp_low"></h1>
+            <h1 data-binding="current_wind_speed"></h1>
             <h1>
-                <span data-binding="now_wind_degree"></span><span class="degree_symbol">&deg;</span>
+                <span data-binding="current_wind_degree"></span><span class="degree_symbol">&deg;</span>
             </h1>
 
             <h1 data-binding="day_0_description_main"></h1>
@@ -126,9 +109,13 @@
                 <span data-binding="day_5_wind_degree"></span><span class="degree_symbol">&deg;</span>
             </h1>
         </div>
+
+
         <div id="map"></div>
 
-        <script src="/script.js" type="module"></script>
-    </body>
 
+
+
+        <script src="/js/script.js" type="module"></script>
+    </body>
 </html>
