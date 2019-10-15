@@ -495,7 +495,7 @@ function my_initMap( l1, l2, z1 ) {
 
 	// Get your own free OWM API key at https://www.openweathermap.org/appid - please do not re-use mine!
 	// You don't need an API key for this to work at the moment, but this will change eventually.
-	var OWM_API_KEY = '7dbe40f228f2a7d22466fa90a938c477';
+	var OWM_API_KEY = keys.api_key;
 
 	var clouds = L.OWM.clouds({opacity: 0.8, appId: OWM_API_KEY});
 	var cloudscls = L.OWM.cloudsClassic({opacity: 0.5, appId: OWM_API_KEY});
