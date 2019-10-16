@@ -31,28 +31,31 @@
 
         <input placeholder="Enter Your ZIP Code" name="name" id="zip" />
         <p id="zip_display"></p>
-        <p data-binding="error"></p>
+
+
         <div class="results" id="app">
-            <p>{{name}}</p>
-            <p>{{title}}</p>
+            <h1>META</h1>
+            <p>{{city}}</p>
 
             <p>{{location.zip}}</p>
-            <p>{{location.lat}}</p>
-            <p>{{location.lon}}</p>
+            <p>{{location.coord.lat}}</p>
+            <p>{{location.coord.lon}}</p>
             <p>{{location.name}}</p>
 
             <p>{{error}}</p>
 
+
+            <h1>CURRENT</h1>
             <p>{{current.description_main}}</p>
             <p>{{current.description_long}}</p>
             <p>{{current.description_icon}}</p>
 
-            <p class="degree_symbol">{{current.temp_current}}</p>
-            <p  class="degree_symbol">{{current.temp_high}}</p>
-            <p  class="degree_symbol">{{current.temp_low}}</p>
+            <p class="degree_symbol">{{current.temp.current}}</p>
+            <p class="degree_symbol">{{current.temp.high}}</p>
+            <p class="degree_symbol">{{current.temp.low}}</p>
 
-            <p>{{current.wind_speed}}</p>
-            <p>{{current.wind_degree}}</p>
+            <p>{{current.wind.speed}}</p>
+            <p class="degree_symbol">{{current.wind.degree}}</p>
             <p>{{current.cloud_cover}}</p>
 
             <p>{{current.rain}}</p>
@@ -61,16 +64,39 @@
             <p>{{current.sunrise}}</p>
             <p>{{current.sunset}}</p>
 
-            <p>{{forecast[0].description_main}}</p>
-            <p>{{forecast[0].description_long}}</p>
-            <p>{{forecast[0].description_icon}}</p>
 
-            <p  class="degree_symbol">{{forecast[0].temp_high}}</p>
-            <p  class="degree_symbol">{{forecast[0].temp_low}}</p>
+            <h1>HOURLY</h1>
+            <h4>Hour 1</h4>
+            <p>{{hourly[0].isDaytime}}</p>
+            <p>{{hourly[0].number}}</p>
+            <p>{{hourly[0].shortForecast}}</p>
+            <p>{{hourly[0].startTime}}</p>
+            <p class="degree_symbol">{{hourly[0].temperature}}</p>
+            <p>{{hourly[0].emperatureTrend}}</p>
+            <p>{{hourly[0].windSpeed}}</p>
+            <p>{{hourly[0].windDirection}}</p>
 
-            <p>{{forecast[0].wind_speed}}</p>
-            <p>{{forecast[0].wind_degree}}</p>
-            <p>{{forecast[0].cloud_cover}}</p>
+            <h1>FORECAST</h1>
+            <h4>Day 1</h4>
+            <p  class="degree_symbol">High - {{forecast[0].max_temp}}</p>
+            <p  class="degree_symbol">Low - {{forecast[0].min_temp}}</p>
+            <p>{{forecast[0].uv}}</p>
+            <p>{{forecast[0].weather.description}}</p>
+
+            <p>{{forecast[0].wind_spd}} mph</p>
+            <p>{{forecast[0].wind_cdir_full}}</p>
+            <p>{{forecast[0].wind_cdir}}</p>
+
+            <p>{{forecast[0].vis}}</p>
+
+            <p>{{forecast[0].pop}}</p>
+
+            <p>{{forecast[0].precip}}</p>
+
+            <p>{{forecast[0].snow}}</p>
+
+            <p>{{forecast[0].dewpt}}</p>
+            <p>{{forecast[0].pres}} mb</p>
 
         </div>
         <div id="map"></div>

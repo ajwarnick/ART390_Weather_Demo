@@ -1,6 +1,4 @@
 let nws; 
-let hourly;
-
 /* ZIP CODE FUNCTIONS */
 let zip = "";
 const zip_input = document.getElementById('zip');
@@ -11,19 +9,27 @@ zip_input.addEventListener('input', zipTest);
 let gridX;
 let gridY;
 
-
-
-
 var weather = {
-    name: 'Francesco',
-    title: 'Front-end Developer',
+	error: "",
+
+    city: "",
 	location: {
 		zip: "",
-		lat: "",
-		lon: "",
+		coord: {
+			lat: "",
+			lon: ""
+		},
 		name: ""
 	},
-	error: "",
+	
+
+	time:{
+		day:"",
+		date:"",
+		hour:"",
+		minute:"",
+		seconds:""
+	},
 	
 	current: {
 		description: {
@@ -55,78 +61,29 @@ var weather = {
 		moon_phase: ""
 	},
 
-	hourly: {
-
-	},
+	hourly: [
+		{},
+		{},
+		{},
+		{},
+		{},
+		{},
+		{},
+		{},
+		{},
+		{},
+		{},
+		{},
+	],
 
 	forecast: [
-		{
-			description_main: "",
-			description_long: "",
-			description_icon: "",
-
-			temp_current: "",
-			temp_high: "",
-			temp_low: "",
-
-			wind_speed: "",
-			wind_degree: "",
-			cloud_cover: "",
-		},
-		{
-			description_main: "",
-			description_long: "",
-			description_icon: "",
-
-			temp_current: "",
-			temp_high: "",
-			temp_low: "",
-
-			wind_speed: "",
-			wind_degree: "",
-			cloud_cover: "",
-		},
-		{
-			description_main: "",
-			description_long: "",
-			description_icon: "",
-
-			temp_current: "",
-			temp_high: "",
-			temp_low: "",
-
-			wind_speed: "",
-			wind_degree: "",
-			cloud_cover: "",
-		},
-		{
-			description_main: "",
-			description_long: "",
-			description_icon: "",
-
-			temp_current: "",
-			temp_high: "",
-			temp_low: "",
-
-			wind_speed: "",
-			wind_degree: "",
-			cloud_cover: "",
-		},
-		{
-			description_main: "",
-			description_long: "",
-			description_icon: "",
-
-			temp_current: "",
-			temp_high: "",
-			temp_low: "",
-
-			wind_speed: "",
-			wind_degree: "",
-			cloud_cover: "",
-		},
-
-
+		{ weather:"" },
+		{ weather:"" },
+		{ weather:"" },
+		{ weather:"" },
+		{ weather:"" },
+		{ weather:"" },
+		{ weather:"" }
 	],
 	end: ""
 }
@@ -150,7 +107,8 @@ function zipTest(e) {
         if (found[0] !== zip) {
 			zip = found[0];
 			weather.location.zip = zip; 
-            getWeather(keys.api_key, zip);
+			getCurrent(zip);
+			getForecast(zip);
         }
 
     }
@@ -160,66 +118,79 @@ function zipTest(e) {
 
 /* WEATHER RETRIEVAL AND PARSING FUNCTIONS */
 
-function getWeather(k, z) {
-    let toFetchCurrent = "https://api.openweathermap.org/data/2.5/weather?zip=" + z + ",us&appid=" + k;
-    //let toFetchForecast = "https://api.openweathermap.org/data/2.5/forecast/daily?zip=" + z + ",us&appid=" + k;
-    console.log(toFetchCurrent);
-    fetch(toFetchCurrent)
+function getCurrent(z) {
+    let toFetchCurrent = "https://api.openweathermap.org/data/2.5/weather?zip=" + z + ",us&appid=" + Keys.openweathermap;
+	
+	fetch(toFetchCurrent)
         .then(function (response) {
             return response.json();
         })
         .then(function (myJson) {
-            mapCurrentResultsToState(myJson);
+			mapCurrentResultsToState(myJson);
+			if(myJson.coord.lat !== undefined && myJson.coord.lon !== undefined){
+				getHourlyForcast( myJson.coord.lat, myJson.coord.lon);
+				//update map
+			}
         });
 
-    // fetch(toFetchForecast)
-    //     .then(function (response) {
-    //         return response.json();
-    //     })
-    //     .then(function (myJson) {
-    //         console.log(myJson);
-    //         //mapForecastResultsToState(myJson);
-    //     });
+    
 }
-
 
 function mapCurrentResultsToState(j) {
-	
-    if (j.cod === "404") {
-		//state["error"] = j.message;
-		
+
+	if (j.cod === "404" || j.cod === "401" ) {
+		weather.error = j.message;
     } else {
-        weather.current.description_main = j.weather[0].main;
-        // state["current_description_long"] = j.weather[0].description;
-        // state["current_description_icon"] = j.weather[0].icon;
 
-        // state["current_temp_current"] = kelvinToFahrenheit(j.main.temp);
-        // state["current_temp_high"] = kelvinToFahrenheit(j.main.temp_max);
-        // state["current_temp_low"] = kelvinToFahrenheit(j.main.temp_min);
-
-        // state["current_wind_speed"] = j.wind.speed;
-        // state["current_wind_degree"] = j.wind.deg;
-        // state["current_cloud_cover"] = j.clouds.all;
+		weather.name = j.name;
+		weather.location.coord = j.coord;
+		weather.current.description_main = j.weather[0].main;
+		weather.current.description_long = j.weather[0].description;
+		weather.current.description_icon = j.weather[0].icon;
+		weather.current.temp.current = kelvinToFahrenheit(j.main.temp);
+		weather.current.temp.high = kelvinToFahrenheit(j.main.temp_max);
+		weather.current.temp.low = kelvinToFahrenheit(j.main.temp_min);
+	
+		weather.current.wind.speed = j.wind.speed + "mph";
+		weather.current.wind.degree = j.wind.deg;
+        weather.current.cloud_cover = j.clouds.all;
 	}
-	console.log(weather.current.description_main);
+
 }
 
-function getUVIndex(k,lat, lon){
-    // http://api.openweathermap.org/data/2.5/uvi?appid="+k+"&lat="+lat+"&lon="+lon
-    let toFetch = "https://api.openweathermap.org/data/2.5/weather?zip=" + z + ",us&appid=" + k;
-    console.log(toFetch);
 
-    // fetch(toFetch)
-    // .then(function(response) {
-    //     return response.json();
-    // })
-    // .then(function(myJson) {
-    //     console.log(myJson);
-    // });
+
+function getForecast(z) {
+	let toFetchForecast = "https://api.weatherbit.io/v2.0/forecast/daily?postal_code=" + z + "&country=US&units=I&key="+Keys.weatherbit;
+
+	fetch(toFetchForecast,{
+		method: 'GET',
+		mode: "cors",
+		headers: { 'Content-Type': 'application/json' }
+	}).then(function (response) {
+			return response.json();
+		}).then(function (myJson) {
+			mapForecastResultsToState(myJson);
+		});
 }
+
+function mapForecastResultsToState(j) {
+	if (j.cod === "404" || j.cod === "401" ) {
+		weather.error = j.message;
+    } else {
+		weather.forecast = [];
+		j.data.forEach(function(element) {
+			weather.forecast.push(element);
+		});
+    }
+}
+
+
 
 function getHourlyForcast( lat, lon ){
-    let toFetch = "https://api.weather.gov/points/" + lat + "," + lon;
+	let toFetch = "https://api.weather.gov/points/" + lat + "," + lon;
+	console.log(toFetch);
+
     fetch(toFetch)
     .then(function(response) {
         return response.json();
@@ -235,32 +206,16 @@ function getHourlyForcast( lat, lon ){
             return response.json();
         })
         .then(function(myJson) {
-            hourly = myJson.properties.periods;
+			weather.hourly = myJson.properties.periods;
+			console.log(weather.hourly);
         })
     });
 }
 
-getHourlyForcast( 40.75, -73.92);
 
 
-function mapForecastResultsToState(j) {
-    if (j.cod === "404") {
-        state["error"] = j.message;
-    } else {
-        state["current_description_main"] = j.list[0].main;
-        state["day_0_description_main"] = j.list[0];
-        state["day_0_description_long"] = j.list[0];
-        state["day_0_description_icon"] = j.list[0];
 
-        state["day_0_temp_current"] = j.list[0];
-        state["day_0_temp_high"] = j.list[0];
-        state["day_0_temp_low"] = j.list[0];
 
-        state["day_0_wind_speed"] = j.list[0];
-        state["day_0_wind_degree"] = j.list[0];
-        state["day_0_cloud_cover"] = j.list[0];
-    }
-}
 
 
 
@@ -270,23 +225,6 @@ var vm = new Vue({
 	data: weather
 })
 
-function mapCurrentResultsToState(j) {
-    if (j.cod === "404") {
-        state["error"] = j.message;
-    } else {
-        state["current_description_main"] = j.weather[0].main;
-        state["current_description_long"] = j.weather[0].description;
-        state["current_description_icon"] = j.weather[0].icon;
-
-        state["current_temp_current"] = kelvinToFahrenheit(j.main.temp);
-        //state["current_temp_high"] = kelvinToFahrenheit(j.main.temp_max);
-        //state["current_temp_low"] = kelvinToFahrenheit(j.main.temp_min);
-
-        state["current_wind_speed"] = j.wind.speed;
-        state["current_wind_degree"] = j.wind.deg;
-        state["current_cloud_cover"] = j.clouds.all;
-    }
-}
 
 
 /* HELPER FUNCTIONS */
@@ -701,7 +639,7 @@ function my_initMap( l1, l2, z1 ) {
 
 	// Get your own free OWM API key at https://www.openweathermap.org/appid - please do not re-use mine!
 	// You don't need an API key for this to work at the moment, but this will change eventually.
-	var OWM_API_KEY = Keys.api_key;
+	var OWM_API_KEY = Keys.openweathermap;
 
 	var clouds = L.OWM.clouds({opacity: 0.8, appId: OWM_API_KEY});
 	var cloudscls = L.OWM.cloudsClassic({opacity: 0.5, appId: OWM_API_KEY});
