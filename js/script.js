@@ -129,7 +129,7 @@ function getCurrent(z) {
 			mapCurrentResultsToState(myJson);
 			if(myJson.coord.lat !== undefined && myJson.coord.lon !== undefined){
 				getHourlyForcast( myJson.coord.lat, myJson.coord.lon);
-				//update map
+				my_initMap( myJson.coord.lat, myJson.coord.lon, 9 );
 			}
         });
 
@@ -688,7 +688,7 @@ function my_initMap( l1, l2, z1 ) {
 
 
 
-my_initMap( 39.1836, -96.5717, 7 );
+
 /**
  * END
  * MAP INITIALIZE
