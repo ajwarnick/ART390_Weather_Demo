@@ -26,23 +26,33 @@ var weather = {
 	error: "",
 	
 	current: {
-		description_main: "",
-		description_long: "",
-		description_icon: "",
+		description: {
+			main: "",
+			long: "",
+			icon: "",
+		},
+		temp:{
+			current: "",
+			high: "",
+			low: "",
+		},
+		wind: {
+			speed: "",
+			degree: "",
+			direction: ""	
+		},
 
-		temp_current: "",
-		temp_high: "",
-		temp_low: "",
-
-		wind_speed: "",
-		wind_degree: "",
 		cloud_cover: "",
 
-		rain: "",
-		snow: "",
+		parcipitation: {
+			rain: "",
+			snow: "",
+
+		},
 
 		sunrise: "",
 		sunset: "",
+		moon_phase: ""
 	},
 
 	hourly: {
@@ -115,48 +125,11 @@ var weather = {
 			wind_degree: "",
 			cloud_cover: "",
 		},
-		{
-			description_main: "",
-			description_long: "",
-			description_icon: "",
 
-			temp_current: "",
-			temp_high: "",
-			temp_low: "",
 
-			wind_speed: "",
-			wind_degree: "",
-			cloud_cover: "",
-		},
-		{
-			description_main: "",
-			description_long: "",
-			description_icon: "",
-
-			temp_current: "",
-			temp_high: "",
-			temp_low: "",
-
-			wind_speed: "",
-			wind_degree: "",
-			cloud_cover: "",
-		},
-		{
-			description_main: "",
-			description_long: "",
-			description_icon: "",
-
-			temp_current: "",
-			temp_high: "",
-			temp_low: "",
-
-			wind_speed: "",
-			wind_degree: "",
-			cloud_cover: "",
-		}
 	],
-};
-
+	end: ""
+}
 
 
 
@@ -166,7 +139,6 @@ if (getParameterByName('zip')) {
 }
 
 function zipTest(e) {
-    // log.textContent = e.target.value;
     let log = document.getElementById('zip_display');
 
     var test_zip = e.target.value.replace(/\D/g, '');
@@ -176,9 +148,9 @@ function zipTest(e) {
     if (found) {
         zip_input.blur();
         if (found[0] !== zip) {
-            zip = found[0];
-            log.textContent = zip;
-            getWeather(Keys.api_key, zip);
+			zip = found[0];
+			weather.location.zip = zip; 
+            getWeather(keys.api_key, zip);
         }
 
     }
@@ -298,6 +270,23 @@ var vm = new Vue({
 	data: weather
 })
 
+function mapCurrentResultsToState(j) {
+    if (j.cod === "404") {
+        state["error"] = j.message;
+    } else {
+        state["current_description_main"] = j.weather[0].main;
+        state["current_description_long"] = j.weather[0].description;
+        state["current_description_icon"] = j.weather[0].icon;
+
+        state["current_temp_current"] = kelvinToFahrenheit(j.main.temp);
+        //state["current_temp_high"] = kelvinToFahrenheit(j.main.temp_max);
+        //state["current_temp_low"] = kelvinToFahrenheit(j.main.temp_min);
+
+        state["current_wind_speed"] = j.wind.speed;
+        state["current_wind_degree"] = j.wind.deg;
+        state["current_cloud_cover"] = j.clouds.all;
+    }
+}
 
 
 /* HELPER FUNCTIONS */
