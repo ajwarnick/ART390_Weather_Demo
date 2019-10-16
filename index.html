@@ -7,6 +7,10 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Weather</title>
 
+        <script src="/js/libraries/vue.min.js"></script>
+        <script src="keys.js"></script>
+        <script src="/js/moon.js"></script>
+
         <link rel="stylesheet" href="/js/libraries/leaflet/leaflet.css" />
         <link rel="stylesheet" href="/js/libraries/leaflet/leaflet-openweathermap.css" />
         <link rel="stylesheet" href="/js/libraries/leaflet/leaflet-languageselector.css" />
@@ -18,99 +22,57 @@
         <script src="/js/libraries/leaflet/leaflet-openweathermap.js"></script>
         <script src="/js/libraries/leaflet/leaflet-languageselector.js"></script>
 
-
         <link rel="stylesheet" href="/style.css">
     </head>
 
     <body>
 
+
+
         <input placeholder="Enter Your ZIP Code" name="name" id="zip" />
         <p id="zip_display"></p>
         <p data-binding="error"></p>
+        <div class="results" id="app">
+            <p>{{name}}</p>
+            <p>{{title}}</p>
 
-        <div class="results">
-            <h1 data-binding="current_description_main"></h1>
-            <h1 data-binding="current_description_long"></h1>
-            <h1 data-binding="current_description_icon"></h1>
-            <h1 data-binding="current_temp_current"></h1>
-            <h1 data-binding="current_temp_high"></h1>
-            <h1 data-binding="current_temp_low"></h1>
-            <h1 data-binding="current_wind_speed"></h1>
-            <h1>
-                <span data-binding="current_wind_degree"></span><span class="degree_symbol">&deg;</span>
-            </h1>
+            <p>{{location.zip}}</p>
+            <p>{{location.lat}}</p>
+            <p>{{location.lon}}</p>
+            <p>{{location.name}}</p>
 
-            <h1 data-binding="day_0_description_main"></h1>
-            <h1 data-binding="day_0_description_long"></h1>
-            <h1 data-binding="day_0_description_icon"></h1>
-            <h1 data-binding="day_0_temp_current"></h1>
-            <h1 data-binding="day_0_temp_high"></h1>
-            <h1 data-binding="day_0_temp_low"></h1>
-            <h1 data-binding="day_0_wind_speed"></h1>
-            <h1>
-                <span data-binding="day_0_wind_degree"></span><span class="degree_symbol">&deg;</span>
-            </h1>
+            <p>{{error}}</p>
 
-            <h1 data-binding="day_1_description_main"></h1>
-            <h1 data-binding="day_1_description_long"></h1>
-            <h1 data-binding="day_1_description_icon"></h1>
-            <h1 data-binding="day_1_temp_current"></h1>
-            <h1 data-binding="day_1_temp_high"></h1>
-            <h1 data-binding="day_1_temp_low"></h1>
-            <h1 data-binding="day_1_wind_speed"></h1>
-            <h1>
-                <span data-binding="day_1_wind_degree"></span><span class="degree_symbol">&deg;</span>
-            </h1>
+            <p>{{current.description_main}}</p>
+            <p>{{current.description_long}}</p>
+            <p>{{current.description_icon}}</p>
 
+            <p class="degree_symbol">{{current.temp_current}}</p>
+            <p  class="degree_symbol">{{current.temp_high}}</p>
+            <p  class="degree_symbol">{{current.temp_low}}</p>
 
-            <h1 data-binding="day_2_description_main"></h1>
-            <h1 data-binding="day_2_description_long"></h1>
-            <h1 data-binding="day_2_description_icon"></h1>
-            <h1 data-binding="day_2_temp_current"></h1>
-            <h1 data-binding="day_2_temp_high"></h1>
-            <h1 data-binding="day_2_temp_low"></h1>
-            <h1 data-binding="day_2_wind_speed"></h1>
-            <h1>
-                <span data-binding="day_2_wind_degree"></span><span class="degree_symbol">&deg;</span>
-            </h1>
+            <p>{{current.wind_speed}}</p>
+            <p>{{current.wind_degree}}</p>
+            <p>{{current.cloud_cover}}</p>
 
+            <p>{{current.rain}}</p>
+            <p>{{current.snow}}</p>
 
-            <h1 data-binding="day_3_description_main"></h1>
-            <h1 data-binding="day_3_description_long"></h1>
-            <h1 data-binding="day_3_description_icon"></h1>
-            <h1 data-binding="day_3_temp_current"></h1>
-            <h1 data-binding="day_3_temp_high"></h1>
-            <h1 data-binding="day_3_temp_low"></h1>
-            <h1 data-binding="day_3_wind_speed"></h1>
-            <h1>
-                <span data-binding="day_3_wind_degree"></span><span class="degree_symbol">&deg;</span>
-            </h1>
+            <p>{{current.sunrise}}</p>
+            <p>{{current.sunset}}</p>
 
+            <p>{{forecast[0].description_main}}</p>
+            <p>{{forecast[0].description_long}}</p>
+            <p>{{forecast[0].description_icon}}</p>
 
-            <h1 data-binding="day_4_description_main"></h1>
-            <h1 data-binding="day_4_description_long"></h1>
-            <h1 data-binding="day_4_description_icon"></h1>
-            <h1 data-binding="day_4_temp_current"></h1>
-            <h1 data-binding="day_4_temp_high"></h1>
-            <h1 data-binding="day_4_temp_low"></h1>
-            <h1 data-binding="day_4_wind_speed"></h1>
-            <h1>
-                <span data-binding="day_4_wind_degree"></span><span class="degree_symbol">&deg;</span>
-            </h1>
+            <p  class="degree_symbol">{{forecast[0].temp_high}}</p>
+            <p  class="degree_symbol">{{forecast[0].temp_low}}</p>
 
-            <h1 data-binding="day_5_description_main"></h1>
-            <h1 data-binding="day_5_description_long"></h1>
-            <h1 data-binding="day_5_description_icon"></h1>
-            <h1 data-binding="day_5_temp_current"></h1>
-            <h1 data-binding="day_5_temp_high"></h1>
-            <h1 data-binding="day_5_temp_low"></h1>
-            <h1 data-binding="day_5_wind_speed"></h1>
-            <h1>
-                <span data-binding="day_5_wind_degree"></span><span class="degree_symbol">&deg;</span>
-            </h1>
+            <p>{{forecast[0].wind_speed}}</p>
+            <p>{{forecast[0].wind_degree}}</p>
+            <p>{{forecast[0].cloud_cover}}</p>
+
         </div>
-
-
         <div id="map"></div>
 
 
