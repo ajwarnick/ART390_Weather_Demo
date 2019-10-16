@@ -1,3 +1,15 @@
+// TODO
+
+// - MAKE MAP RESPOND TO CHANGES
+// - HOOK UP CLOCK
+// - HOOK UP MOOD PHASES
+
+
+
+
+
+
+
 let nws; 
 /* ZIP CODE FUNCTIONS */
 let zip = "";
