@@ -1,5 +1,5 @@
 'use strict';
-import { keys } from "./keys.js";
+import { keys } from "../keys.js";
 import { moon } from "./moon.js";
 
 let nws; 
@@ -14,6 +14,131 @@ zip_input.addEventListener('input', zipTest);
 // let lon = -73.92;
 let gridX;
 let gridY;
+
+
+
+
+const weather = createState({
+    name: 'Francesco',
+    title: 'Front-end Developer',
+	location: {
+		zip: "",
+		lat: "",
+		lon: "",
+		name: ""
+	},
+	error: "",
+	
+	current: {
+		description_main: "",
+		description_long: "",
+		description_icon: "",
+
+		temp_current: "",
+		temp_high: "",
+		temp_low: "",
+
+		wind_speed: "",
+		wind_degree: "",
+		cloud_cover: "",
+
+		rain: "",
+		snow: "",
+
+		sunrise: "",
+		sunset: "",
+	},
+
+	hourly: {
+
+	},
+
+	forecast: [
+		{
+			description_main: "",
+			description_long: "",
+			description_icon: "",
+
+			temp_current: "",
+			temp_high: "",
+			temp_low: "",
+
+			wind_speed: "",
+			wind_degree: "",
+			cloud_cover: "",
+		},
+
+
+	],
+    
+
+    
+
+    day_1_description_main: "",
+    day_1_description_long: "",
+    day_1_description_icon: "",
+
+    day_1_temp_current: "",
+    day_1_temp_high: "",
+    day_1_temp_low: "",
+
+    day_1_wind_speed: "",
+    day_1_wind_degree: "",
+    day_1_cloud_cover: "",
+
+    day_2_description_main: "",
+    day_2_description_long: "",
+    day_2_description_icon: "",
+
+    day_2_temp_current: "",
+    day_2_temp_high: "",
+    day_2_temp_low: "",
+
+    day_2_wind_speed: "",
+    day_2_wind_degree: "",
+    day_2_cloud_cover: "",
+
+    day_3_description_main: "",
+    day_3_description_long: "",
+    day_3_description_icon: "",
+
+    day_3_temp_current: "",
+    day_3_temp_high: "",
+    day_3_temp_low: "",
+
+    day_3_wind_speed: "",
+    day_3_wind_degree: "",
+    day_3_cloud_cover: "",
+
+    day_4_description_main: "",
+    day_4_description_long: "",
+    day_4_description_icon: "",
+
+    day_4_temp_current: "",
+    day_4_temp_high: "",
+    day_4_temp_low: "",
+
+    day_4_wind_speed: "",
+    day_4_wind_degree: "",
+    day_4_cloud_cover: "",
+
+    day_5_description_main: "",
+    day_5_description_long: "",
+    day_5_description_icon: "",
+
+    day_5_temp_current: "",
+    day_5_temp_high: "",
+    day_5_temp_low: "",
+
+    day_5_wind_speed: "",
+    day_5_wind_degree: "",
+    day_5_cloud_cover: "",
+
+});
+
+
+
+
 
 if (getParameterByName('zip')) {
     zip = getParameterByName('zip');
@@ -145,151 +270,61 @@ function mapForecastResultsToState(j) {
 
 /* TWO WAY DATA BINDING FUNCTIONS */
 
-const createState = (state) => {
-    return new Proxy(state, {
-        set(target, property, value) {
-            target[property] = value;
-            render();
-            return true;
+function Binding(b) {
+    _this = this
+    this.elementBindings = []
+    this.value = b.object[b.property]
+    this.valueGetter = function(){
+        return _this.value;
+    }
+    this.valueSetter = function(val){
+        _this.value = val
+        for (var i = 0; i < _this.elementBindings.length; i++) {
+            var binding=_this.elementBindings[i]
+            binding.element[binding.attribute] = val
         }
-    });
-};
+    }
+    this.addBinding = function(element, attribute, event){
+        var binding = {
+            element: element,
+            attribute: attribute
+        }
+        if (event){
+            element.addEventListener(event, function(event){
+                _this.valueSetter(element[attribute]);
+            })
+            binding.event = event
+        }       
+        this.elementBindings.push(binding)
+        element[attribute] = _this.value
+        return _this
+    }
 
-const state = createState({
-    name: 'Francesco',
-    title: 'Front-end Developer',
-	location: {
-		zip: "",
-		lat: "",
-		lon: "",
-		name: ""
-	},
-	error: "",
-	
-	current: {
-		description_main: "",
-		description_long: "",
-		description_icon: "",
+    Object.defineProperty(b.object, b.property, {
+        get: this.valueGetter,
+        set: this.valueSetter
+    }); 
 
-		temp_current: "",
-		temp_high: "",
-		temp_low: "",
+    b.object[b.property] = this.value;
+}
 
-		wind_speed: "",
-		wind_degree: "",
-		cloud_cover: "",
+var obj = {a:123}
+var myInputElement1 = document.getElementById("myText1")
+var myInputElement2 = document.getElementById("myText2")
+var myDOMElement = document.getElementById("myDomElement")
 
-		rain: "",
-		snow: "",
+new Binding({
+	object: obj,
+	property: "a"
+})
+.addBinding(myInputElement1, "value", "keyup")
+.addBinding(myInputElement2, "value", "keyup")
+.addBinding(myDOMElement, "innerHTML")
 
-		sunrise: "",
-		sunset: "",
-	},
-
-	hourly: {
-
-	},
-
-	forecast: {
-
-	},
-    
-
-    day_0_description_main: "",
-    day_0_description_long: "",
-    day_0_description_icon: "",
-
-    day_0_temp_current: "",
-    day_0_temp_high: "",
-    day_0_temp_low: "",
-
-    day_0_wind_speed: "",
-    day_0_wind_degree: "",
-    day_0_cloud_cover: "",
-
-    day_1_description_main: "",
-    day_1_description_long: "",
-    day_1_description_icon: "",
-
-    day_1_temp_current: "",
-    day_1_temp_high: "",
-    day_1_temp_low: "",
-
-    day_1_wind_speed: "",
-    day_1_wind_degree: "",
-    day_1_cloud_cover: "",
-
-    day_2_description_main: "",
-    day_2_description_long: "",
-    day_2_description_icon: "",
-
-    day_2_temp_current: "",
-    day_2_temp_high: "",
-    day_2_temp_low: "",
-
-    day_2_wind_speed: "",
-    day_2_wind_degree: "",
-    day_2_cloud_cover: "",
-
-    day_3_description_main: "",
-    day_3_description_long: "",
-    day_3_description_icon: "",
-
-    day_3_temp_current: "",
-    day_3_temp_high: "",
-    day_3_temp_low: "",
-
-    day_3_wind_speed: "",
-    day_3_wind_degree: "",
-    day_3_cloud_cover: "",
-
-    day_4_description_main: "",
-    day_4_description_long: "",
-    day_4_description_icon: "",
-
-    day_4_temp_current: "",
-    day_4_temp_high: "",
-    day_4_temp_low: "",
-
-    day_4_wind_speed: "",
-    day_4_wind_degree: "",
-    day_4_cloud_cover: "",
-
-    day_5_description_main: "",
-    day_5_description_long: "",
-    day_5_description_icon: "",
-
-    day_5_temp_current: "",
-    day_5_temp_high: "",
-    day_5_temp_low: "",
-
-    day_5_wind_speed: "",
-    day_5_wind_degree: "",
-    day_5_cloud_cover: "",
-
-});
-
-const listeners = document.querySelectorAll('[data-model]');
-
-listeners.forEach((listener) => {
-    const name = listener.dataset.model;
-    listener.addEventListener('keyup', (event) => {
-        state[name] = listener.value;
-    });
-});
+obj.a = 456;
 
 
-const render = () => {
-    const bindings = Array.from(document.querySelectorAll('[data-binding]')).map(
-        e => e.dataset.binding
-    );
-    bindings.forEach((binding) => {
-        document.querySelector(`[data-binding='${binding}']`).innerHTML = state[binding];
-        //document.querySelector(`[data-model='${binding}']`).value = state[binding];
-    });
-};
 
-render();
         
 
 
@@ -697,7 +732,6 @@ function getLocalLanguage() {
  * Initialize the map.
  */
 function my_initMap( l1, l2, z1 ) {
-	console.log("bang");
 
 	var humanitarian = L.tileLayer('https://tile-{s}.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
 		maxZoom: 17,
