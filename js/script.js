@@ -38,9 +38,11 @@ var weather = {
 	time:{
 		day:"",
 		date:"",
-		hour:"",
+		hour_24:"",
+		hour_12: "",
 		minute:"",
-		seconds:""
+		seconds:"",
+		ampm:""
 	},
 	
 	current: {
@@ -201,7 +203,6 @@ function mapForecastResultsToState(j) {
 
 function getHourlyForcast( lat, lon ){
 	let toFetch = "https://api.weather.gov/points/" + lat + "," + lon;
-	console.log(toFetch);
 
     fetch(toFetch)
     .then(function(response) {
@@ -211,7 +212,6 @@ function getHourlyForcast( lat, lon ){
         nws = myJson;
         gridX = nws.properties.gridX;
         gridY = nws.properties.gridY;
-		// get hourly
     }).then(function(){
         let gridFetch = "https://api.weather.gov/gridpoints/TOP/"+gridX+","+gridY+"/forecast/hourly"
         fetch(gridFetch).then(function(response) {
@@ -219,7 +219,6 @@ function getHourlyForcast( lat, lon ){
         })
         .then(function(myJson) {
 			weather.hourly = myJson.properties.periods;
-			console.log(weather.hourly);
         })
     });
 }
@@ -236,6 +235,40 @@ var vm = new Vue({
 	el: '#app',
 	data: weather
 })
+
+
+
+/* DATE FUNCTIONS */
+
+
+var week = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+var timerID = setInterval(updateTime, 1000);
+
+updateTime();
+function updateTime() {
+	var cd = new Date();
+	weather.time.day = week[cd.getDay()];
+	weather.time.ampm = weather.time.hour >= 12 ? 'am' : 'pm';
+	weather.time.hour_24 = zeroPadding(cd.getHours(), 2);
+	weather.time.hour_12 = weather.time.hour_24 % 12;;
+	weather.time.minute = zeroPadding(cd.getMinutes(), 2);
+	weather.time.seconds = zeroPadding(cd.getSeconds(), 2);
+    weather.time.date =  zeroPadding(cd.getFullYear(), 4) + '-' + zeroPadding(cd.getMonth()+1, 2) + '-' + zeroPadding(cd.getDate(), 2);
+};
+
+function zeroPadding(num, digit) {
+    var zero = '';
+    for(var i = 0; i < digit; i++) {
+        zero += '0';
+    }
+    return (zero + num).slice(-digit);
+}
+
+
+
+
+
+
 
 
 
