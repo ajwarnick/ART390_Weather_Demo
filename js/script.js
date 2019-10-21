@@ -1,3 +1,7 @@
+'use strict';
+import { keys } from "../keys.js";
+import { moon } from "./moon.js";
+
 let nws; 
 let hourly;
 
@@ -14,7 +18,7 @@ let gridY;
 
 
 
-var weather = {
+const weather = createState({
     name: 'Francesco',
     title: 'Front-end Developer',
 	location: {
@@ -63,99 +67,74 @@ var weather = {
 			wind_degree: "",
 			cloud_cover: "",
 		},
-		{
-			description_main: "",
-			description_long: "",
-			description_icon: "",
 
-			temp_current: "",
-			temp_high: "",
-			temp_low: "",
 
-			wind_speed: "",
-			wind_degree: "",
-			cloud_cover: "",
-		},
-		{
-			description_main: "",
-			description_long: "",
-			description_icon: "",
-
-			temp_current: "",
-			temp_high: "",
-			temp_low: "",
-
-			wind_speed: "",
-			wind_degree: "",
-			cloud_cover: "",
-		},
-		{
-			description_main: "",
-			description_long: "",
-			description_icon: "",
-
-			temp_current: "",
-			temp_high: "",
-			temp_low: "",
-
-			wind_speed: "",
-			wind_degree: "",
-			cloud_cover: "",
-		},
-		{
-			description_main: "",
-			description_long: "",
-			description_icon: "",
-
-			temp_current: "",
-			temp_high: "",
-			temp_low: "",
-
-			wind_speed: "",
-			wind_degree: "",
-			cloud_cover: "",
-		},
-		{
-			description_main: "",
-			description_long: "",
-			description_icon: "",
-
-			temp_current: "",
-			temp_high: "",
-			temp_low: "",
-
-			wind_speed: "",
-			wind_degree: "",
-			cloud_cover: "",
-		},
-		{
-			description_main: "",
-			description_long: "",
-			description_icon: "",
-
-			temp_current: "",
-			temp_high: "",
-			temp_low: "",
-
-			wind_speed: "",
-			wind_degree: "",
-			cloud_cover: "",
-		},
-		{
-			description_main: "",
-			description_long: "",
-			description_icon: "",
-
-			temp_current: "",
-			temp_high: "",
-			temp_low: "",
-
-			wind_speed: "",
-			wind_degree: "",
-			cloud_cover: "",
-		}
 	],
-};
+    
+
+    
+
+    day_1_description_main: "",
+    day_1_description_long: "",
+    day_1_description_icon: "",
+
+    day_1_temp_current: "",
+    day_1_temp_high: "",
+    day_1_temp_low: "",
+
+    day_1_wind_speed: "",
+    day_1_wind_degree: "",
+    day_1_cloud_cover: "",
+
+    day_2_description_main: "",
+    day_2_description_long: "",
+    day_2_description_icon: "",
+
+    day_2_temp_current: "",
+    day_2_temp_high: "",
+    day_2_temp_low: "",
+
+    day_2_wind_speed: "",
+    day_2_wind_degree: "",
+    day_2_cloud_cover: "",
+
+    day_3_description_main: "",
+    day_3_description_long: "",
+    day_3_description_icon: "",
+
+    day_3_temp_current: "",
+    day_3_temp_high: "",
+    day_3_temp_low: "",
+
+    day_3_wind_speed: "",
+    day_3_wind_degree: "",
+    day_3_cloud_cover: "",
+
+    day_4_description_main: "",
+    day_4_description_long: "",
+    day_4_description_icon: "",
+
+    day_4_temp_current: "",
+    day_4_temp_high: "",
+    day_4_temp_low: "",
+
+    day_4_wind_speed: "",
+    day_4_wind_degree: "",
+    day_4_cloud_cover: "",
+
+    day_5_description_main: "",
+    day_5_description_long: "",
+    day_5_description_icon: "",
+
+    day_5_temp_current: "",
+    day_5_temp_high: "",
+    day_5_temp_low: "",
+
+    day_5_wind_speed: "",
+    day_5_wind_degree: "",
+    day_5_cloud_cover: "",
+
+});
 
 
 
@@ -178,7 +157,7 @@ function zipTest(e) {
         if (found[0] !== zip) {
             zip = found[0];
             log.textContent = zip;
-            getWeather(Keys.api_key, zip);
+            getWeather(keys.api_key, zip);
         }
 
     }
@@ -190,7 +169,8 @@ function zipTest(e) {
 
 function getWeather(k, z) {
     let toFetchCurrent = "https://api.openweathermap.org/data/2.5/weather?zip=" + z + ",us&appid=" + k;
-    //let toFetchForecast = "https://api.openweathermap.org/data/2.5/forecast/daily?zip=" + z + ",us&appid=" + k;
+    let toFetchForecast = "https://api.openweathermap.org/data/2.5/forecast/daily?zip=" + z + ",us&appid=" + k;
+
     console.log(toFetchCurrent);
     fetch(toFetchCurrent)
         .then(function (response) {
@@ -200,36 +180,33 @@ function getWeather(k, z) {
             mapCurrentResultsToState(myJson);
         });
 
-    // fetch(toFetchForecast)
-    //     .then(function (response) {
-    //         return response.json();
-    //     })
-    //     .then(function (myJson) {
-    //         console.log(myJson);
-    //         //mapForecastResultsToState(myJson);
-    //     });
+    fetch(toFetchForecast)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (myJson) {
+            console.log(myJson);
+            //mapForecastResultsToState(myJson);
+        });
 }
 
 
 function mapCurrentResultsToState(j) {
-	
     if (j.cod === "404") {
-		//state["error"] = j.message;
-		
+        state["error"] = j.message;
     } else {
-        weather.current.description_main = j.weather[0].main;
-        // state["current_description_long"] = j.weather[0].description;
-        // state["current_description_icon"] = j.weather[0].icon;
+        state["current_description_main"] = j.weather[0].main;
+        state["current_description_long"] = j.weather[0].description;
+        state["current_description_icon"] = j.weather[0].icon;
 
-        // state["current_temp_current"] = kelvinToFahrenheit(j.main.temp);
-        // state["current_temp_high"] = kelvinToFahrenheit(j.main.temp_max);
-        // state["current_temp_low"] = kelvinToFahrenheit(j.main.temp_min);
+        state["current_temp_current"] = kelvinToFahrenheit(j.main.temp);
+        //state["current_temp_high"] = kelvinToFahrenheit(j.main.temp_max);
+        //state["current_temp_low"] = kelvinToFahrenheit(j.main.temp_min);
 
-        // state["current_wind_speed"] = j.wind.speed;
-        // state["current_wind_degree"] = j.wind.deg;
-        // state["current_cloud_cover"] = j.clouds.all;
-	}
-	console.log(weather.current.description_main);
+        state["current_wind_speed"] = j.wind.speed;
+        state["current_wind_degree"] = j.wind.deg;
+        state["current_cloud_cover"] = j.clouds.all;
+    }
 }
 
 function getUVIndex(k,lat, lon){
@@ -291,12 +268,64 @@ function mapForecastResultsToState(j) {
 }
 
 
+/* TWO WAY DATA BINDING FUNCTIONS */
 
-/* VUE DATA BINDING */
-var vm = new Vue({
-	el: '#app',
-	data: weather
+function Binding(b) {
+    _this = this
+    this.elementBindings = []
+    this.value = b.object[b.property]
+    this.valueGetter = function(){
+        return _this.value;
+    }
+    this.valueSetter = function(val){
+        _this.value = val
+        for (var i = 0; i < _this.elementBindings.length; i++) {
+            var binding=_this.elementBindings[i]
+            binding.element[binding.attribute] = val
+        }
+    }
+    this.addBinding = function(element, attribute, event){
+        var binding = {
+            element: element,
+            attribute: attribute
+        }
+        if (event){
+            element.addEventListener(event, function(event){
+                _this.valueSetter(element[attribute]);
+            })
+            binding.event = event
+        }       
+        this.elementBindings.push(binding)
+        element[attribute] = _this.value
+        return _this
+    }
+
+    Object.defineProperty(b.object, b.property, {
+        get: this.valueGetter,
+        set: this.valueSetter
+    }); 
+
+    b.object[b.property] = this.value;
+}
+
+var obj = {a:123}
+var myInputElement1 = document.getElementById("myText1")
+var myInputElement2 = document.getElementById("myText2")
+var myDOMElement = document.getElementById("myDomElement")
+
+new Binding({
+	object: obj,
+	property: "a"
 })
+.addBinding(myInputElement1, "value", "keyup")
+.addBinding(myInputElement2, "value", "keyup")
+.addBinding(myDOMElement, "innerHTML")
+
+obj.a = 456;
+
+
+
+        
 
 
 
@@ -712,7 +741,7 @@ function my_initMap( l1, l2, z1 ) {
 
 	// Get your own free OWM API key at https://www.openweathermap.org/appid - please do not re-use mine!
 	// You don't need an API key for this to work at the moment, but this will change eventually.
-	var OWM_API_KEY = Keys.api_key;
+	var OWM_API_KEY = keys.api_key;
 
 	var clouds = L.OWM.clouds({opacity: 0.8, appId: OWM_API_KEY});
 	var cloudscls = L.OWM.cloudsClassic({opacity: 0.5, appId: OWM_API_KEY});

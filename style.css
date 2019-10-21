@@ -1,5 +1,5 @@
-.degree_symbol:not(:empty)::after {
-    content: "°"
+.degree_symbol {
+    display: none;
 }
 
 #map {
