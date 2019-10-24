@@ -42,7 +42,8 @@ var weather = {
 		hour_12: "",
 		minute:"",
 		seconds:"",
-		ampm:""
+		ampm:"",
+		moom: ""
 	},
 	
 	current: {
@@ -255,10 +256,11 @@ function updateTime() {
 	weather.time.day = week[cd.getDay()];
 	weather.time.ampm = weather.time.hour >= 12 ? 'am' : 'pm';
 	weather.time.hour_24 = zeroPadding(cd.getHours(), 2);
-	weather.time.hour_12 = weather.time.hour_24 % 12;;
+	weather.time.hour_12 = weather.time.hour_24 % 12;
 	weather.time.minute = zeroPadding(cd.getMinutes(), 2);
 	weather.time.seconds = zeroPadding(cd.getSeconds(), 2);
-    weather.time.date =  zeroPadding(cd.getFullYear(), 4) + '-' + zeroPadding(cd.getMonth()+1, 2) + '-' + zeroPadding(cd.getDate(), 2);
+	weather.time.date =  zeroPadding(cd.getFullYear(), 4) + '-' + zeroPadding(cd.getMonth()+1, 2) + '-' + zeroPadding(cd.getDate(), 2);
+	weather.time.moom = Moon.phase( zeroPadding(cd.getFullYear(), 4), zeroPadding(cd.getMonth()+1, 2), zeroPadding(cd.getDate(), 2) );
 };
 
 function zeroPadding(num, digit) {
