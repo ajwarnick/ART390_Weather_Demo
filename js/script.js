@@ -62,6 +62,8 @@ var weather = {
 			direction: ""	
 		},
 
+		humidity: "",
+		pressure:"",
 		cloud_cover: "",
 
 		parcipitation: {
@@ -164,6 +166,9 @@ function mapCurrentResultsToState(j) {
 		weather.current.temp.current = kelvinToFahrenheit(j.main.temp);
 		weather.current.temp.high = kelvinToFahrenheit(j.main.temp_max);
 		weather.current.temp.low = kelvinToFahrenheit(j.main.temp_min);
+
+		weather.current.pressure = j.main.pressure;
+		weather.current.humidity= j.main.humidity;
 	
 		weather.current.wind.speed = j.wind.speed + "mph";
 		weather.current.wind.degree = j.wind.deg;
