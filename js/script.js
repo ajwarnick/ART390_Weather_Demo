@@ -1,12 +1,3 @@
-// TODO
-
-// - MAKE MAP RESPOND TO CHANGES
-// - HOOK UP CLOCK
-// - HOOK UP MOOD PHASES
-
-
-
-
 
 
 
@@ -146,6 +137,7 @@ function getCurrent(z) {
 			mapCurrentResultsToState(myJson);
 			if(myJson.coord.lat !== undefined && myJson.coord.lon !== undefined){
 				getHourlyForcast( myJson.coord.lat, myJson.coord.lon);
+				destroyMap();
 				my_initMap( myJson.coord.lat, myJson.coord.lon, 9 );
 			}
         });
@@ -231,7 +223,18 @@ function getHourlyForcast( lat, lon ){
 
 
 
+function destroyMap(){
+	var currentMap = document.querySelector('#map');
+	var temp = document.createElement('div');
+	temp.setAttribute("id", "temp");
+	currentMap.insertAdjacentElement('afterend',temp);
+	currentMap.parentNode.removeChild(currentMap);
 
+	var newMap = document.createElement('div');
+	newMap.setAttribute("id", "map");
+	temp.insertAdjacentElement('afterend',newMap);
+	temp.parentNode.removeChild(temp);
+}
 
 
 
