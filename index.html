@@ -7,13 +7,13 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Weather</title>
 
-        <script src="/js/libraries/vue.min.js"></script>
-        <script src="keys.js"></script>
-        <script src="/js/moon.js"></script>
-
         <link rel="stylesheet" href="/js/libraries/leaflet/leaflet.css" />
         <link rel="stylesheet" href="/js/libraries/leaflet/leaflet-openweathermap.css" />
         <link rel="stylesheet" href="/js/libraries/leaflet/leaflet-languageselector.css" />
+
+        <script src="/js/libraries/vue.min.js"></script>
+        <script src="keys.js"></script>
+        <script src="/js/moon.js"></script>
 
         <script src="/js/libraries/leaflet/leaflet.js"></script>
         <script src="/js/libraries/leaflet/Permalink.js"></script>
@@ -22,12 +22,11 @@
         <script src="/js/libraries/leaflet/leaflet-openweathermap.js"></script>
         <script src="/js/libraries/leaflet/leaflet-languageselector.js"></script>
 
+
         <link rel="stylesheet" href="/style.css">
     </head>
 
     <body>
-
-
 
         <input placeholder="Enter Your ZIP Code" name="name" id="zip" />
         <p id="zip_display"></p>
@@ -35,10 +34,10 @@
 
         <div class="results" id="app">
             <h1>TIME</h1>
-            <p>{{time.day}}</p>
+            <p v-bind:class="time.day">{{time.day}}</p>
             <p>{{time.date}}</p>
             <p>{{time.hour_12}} : {{time.minute}} : {{time.seconds}} {{time.ampm}}</p>
-            <p>{{time.moom}}</p>
+            <p v-bind:class="time.moom">{{time.moom}}</p>
 
             <h1>META</h1>
             <p>{{city}}</p>
@@ -66,6 +65,9 @@
 
             <p>{{current.rain}}</p>
             <p>{{current.snow}}</p>
+
+            <p>{{current.pressure}}</p>
+            <p>{{current.humidity}}</p>
 
             <p>{{current.sunrise}}</p>
             <p>{{current.sunset}}</p>
@@ -103,13 +105,10 @@
 
             <p>{{forecast[0].dewpt}}</p>
             <p>{{forecast[0].pres}} mb</p>
-
         </div>
         <div id="map"></div>
 
 
-
-
-        <script src="/js/script.js" type="module"></script>
+        <script src="/js/script.js"></script>
     </body>
 </html>
