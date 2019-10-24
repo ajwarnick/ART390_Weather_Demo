@@ -22,7 +22,8 @@ var weather = {
 			lat: "",
 			lon: ""
 		},
-		name: ""
+		name: "",
+		state: ""
 	},
 	
 
@@ -150,8 +151,8 @@ function mapCurrentResultsToState(j) {
 	if (j.cod === "404" || j.cod === "401" ) {
 		weather.error = j.message;
     } else {
-
-		weather.name = j.name;
+		weather.location.name = j.name;
+		weather.city = j.name;
 		weather.location.coord = j.coord;
 		weather.current.description_main = j.weather[0].main;
 		weather.current.description_long = j.weather[0].description;
@@ -190,9 +191,11 @@ function mapForecastResultsToState(j) {
 	if (j.cod === "404" || j.cod === "401" ) {
 		weather.error = j.message;
     } else {
+		console.log(j);
 		weather.forecast = [];
 		j.data.forEach(function(element) {
 			weather.forecast.push(element);
+			weather.location.state = j.state_code;
 		});
     }
 }
