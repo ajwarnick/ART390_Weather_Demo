@@ -11,6 +11,10 @@
         <link rel="stylesheet" href="/js/libraries/leaflet/leaflet-openweathermap.css" />
         <link rel="stylesheet" href="/js/libraries/leaflet/leaflet-languageselector.css" />
 
+        <script src="/js/libraries/vue.min.js"></script>
+        <script src="keys.js"></script>
+        <script src="/js/moon.js"></script>
+
         <script src="/js/libraries/leaflet/leaflet.js"></script>
         <script src="/js/libraries/leaflet/Permalink.js"></script>
         <script src="/js/libraries/leaflet/Permalink.Layer.js"></script>
@@ -30,10 +34,10 @@
 
         <div class="results" id="app">
             <h1>TIME</h1>
-            <p>{{time.day}}</p>
+            <p v-bind:class="time.day">{{time.day}}</p>
             <p>{{time.date}}</p>
             <p>{{time.hour_12}} : {{time.minute}} : {{time.seconds}} {{time.ampm}}</p>
-            <p>{{time.moom}}</p>
+            <p v-bind:class="time.moom">{{time.moom}}</p>
 
             <h1>META</h1>
             <p>{{city}}</p>
@@ -42,6 +46,7 @@
             <p>{{location.coord.lat}}</p>
             <p>{{location.coord.lon}}</p>
             <p>{{location.name}}</p>
+            <p>{{location.state}}</p>
 
             <p>{{error}}</p>
 
@@ -61,6 +66,9 @@
 
             <p>{{current.rain}}</p>
             <p>{{current.snow}}</p>
+
+            <p>{{current.pressure}}</p>
+            <p>{{current.humidity}}</p>
 
             <p>{{current.sunrise}}</p>
             <p>{{current.sunset}}</p>
@@ -102,6 +110,6 @@
         <div id="map"></div>
 
 
-        <script src="/js/script.js" type="module"></script>
+        <script src="/js/script.js"></script>
     </body>
 </html>
