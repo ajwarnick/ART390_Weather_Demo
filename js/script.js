@@ -1,5 +1,10 @@
 
-
+// TODO
+// Add day of the week of for forcast
+// Hour for hourly
+// Feelslike
+// Forcast Icon id
+// air quality
 
 let nws; 
 /* ZIP CODE FUNCTIONS */
