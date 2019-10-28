@@ -104,10 +104,10 @@ if (getParameterByName('zip')) {
     zip = getParameterByName('zip');
 }
 
-function zipTest(e) {
-    let log = document.getElementById('zip_display');
+function zipTest() {
+	var zipEl =document.getElementById('zip').value;
 
-    var test_zip = e.target.value.replace(/\D/g, '');
+	var test_zip = zipEl.replace(/\D/g, '');
     var regex = /(^\d{5}$)|(^\d{5}-\d{4}$)/g;
     var found = test_zip.match(regex);
 
@@ -119,10 +119,13 @@ function zipTest(e) {
 			getCurrent(zip);
 			getForecast(zip);
         }
-
     }
 }
 
+
+function myzip(){
+	zipTest("myzip");
+}
 
 
 /* WEATHER RETRIEVAL AND PARSING FUNCTIONS */
@@ -241,12 +244,6 @@ function destroyMap(){
 
 
 
-
-/* VUE DATA BINDING */
-var vm = new Vue({
-	el: '#app',
-	data: weather
-})
 
 
 
@@ -751,3 +748,17 @@ function my_initMap( l1, l2, z1 ) {
  * END
  * MAP INITIALIZE
  */
+
+
+
+
+  /* VUE DATA BINDING */
+var vm = new Vue({
+	el: '#app',
+	data: weather,
+	methods: {
+		zip_trigger: function (){
+			myzip();
+		}
+	}
+})
