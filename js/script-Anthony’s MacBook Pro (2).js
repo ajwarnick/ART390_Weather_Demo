@@ -1,12 +1,3 @@
-// TODO
-
-// - MAKE MAP RESPOND TO CHANGES
-// - HOOK UP CLOCK
-// - HOOK UP MOOD PHASES
-
-
-
-
 
 
 
@@ -31,7 +22,8 @@ var weather = {
 			lat: "",
 			lon: ""
 		},
-		name: ""
+		name: "",
+		state: ""
 	},
 	
 
@@ -63,6 +55,8 @@ var weather = {
 			direction: ""	
 		},
 
+		humidity: "",
+		pressure:"",
 		cloud_cover: "",
 
 		parcipitation: {
@@ -144,6 +138,7 @@ function getCurrent(z) {
 			mapCurrentResultsToState(myJson);
 			if(myJson.coord.lat !== undefined && myJson.coord.lon !== undefined){
 				getHourlyForcast( myJson.coord.lat, myJson.coord.lon);
+				destroyMap();
 				my_initMap( myJson.coord.lat, myJson.coord.lon, 9 );
 			}
         });
@@ -156,8 +151,8 @@ function mapCurrentResultsToState(j) {
 	if (j.cod === "404" || j.cod === "401" ) {
 		weather.error = j.message;
     } else {
-
-		weather.name = j.name;
+		weather.location.name = j.name;
+		weather.city = j.name;
 		weather.location.coord = j.coord;
 		weather.current.description_main = j.weather[0].main;
 		weather.current.description_long = j.weather[0].description;
@@ -165,6 +160,9 @@ function mapCurrentResultsToState(j) {
 		weather.current.temp.current = kelvinToFahrenheit(j.main.temp);
 		weather.current.temp.high = kelvinToFahrenheit(j.main.temp_max);
 		weather.current.temp.low = kelvinToFahrenheit(j.main.temp_min);
+
+		weather.current.pressure = j.main.pressure;
+		weather.current.humidity= j.main.humidity;
 	
 		weather.current.wind.speed = j.wind.speed + "mph";
 		weather.current.wind.degree = j.wind.deg;
@@ -193,9 +191,11 @@ function mapForecastResultsToState(j) {
 	if (j.cod === "404" || j.cod === "401" ) {
 		weather.error = j.message;
     } else {
+		console.log(j);
 		weather.forecast = [];
 		j.data.forEach(function(element) {
 			weather.forecast.push(element);
+			weather.location.state = j.state_code;
 		});
     }
 }
@@ -226,7 +226,18 @@ function getHourlyForcast( lat, lon ){
 
 
 
+function destroyMap(){
+	var currentMap = document.querySelector('#map');
+	var temp = document.createElement('div');
+	temp.setAttribute("id", "temp");
+	currentMap.insertAdjacentElement('afterend',temp);
+	currentMap.parentNode.removeChild(currentMap);
 
+	var newMap = document.createElement('div');
+	newMap.setAttribute("id", "map");
+	temp.insertAdjacentElement('afterend',newMap);
+	temp.parentNode.removeChild(temp);
+}
 
 
 
@@ -251,13 +262,11 @@ function updateTime() {
 	weather.time.day = week[cd.getDay()];
 	weather.time.ampm = weather.time.hour >= 12 ? 'am' : 'pm';
 	weather.time.hour_24 = zeroPadding(cd.getHours(), 2);
-	weather.time.hour_12 = weather.time.hour_24 % 12;;
+	weather.time.hour_12 = weather.time.hour_24 % 12;
 	weather.time.minute = zeroPadding(cd.getMinutes(), 2);
 	weather.time.seconds = zeroPadding(cd.getSeconds(), 2);
 	weather.time.date =  zeroPadding(cd.getFullYear(), 4) + '-' + zeroPadding(cd.getMonth()+1, 2) + '-' + zeroPadding(cd.getDate(), 2);
-	
 	weather.time.moom = Moon.phase( zeroPadding(cd.getFullYear(), 4), zeroPadding(cd.getMonth()+1, 2), zeroPadding(cd.getDate(), 2) );
-	
 };
 
 function zeroPadding(num, digit) {
