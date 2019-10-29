@@ -85,11 +85,9 @@
             <p>{{hourly[0].shortForecast}}</p>
             <p>{{hourly[0].startTime}}</p>
             <p class="degree_symbol">{{hourly[0].temperature}}</p>
-            <p>{{hourly[0].emperatureTrend}}</p>
+            <p>{{hourly[0].temperatureTrend}}</p>
             <p>{{hourly[0].windSpeed}}</p>
             <p>{{hourly[0].windDirection}}</p>
-            <p>hi</p>
-            <p>{{hourly[0].app_temp}}</p>
 
             <h1>FORECAST</h1>
             <h4>Day 1</h4>
@@ -99,7 +97,7 @@
             <p>exmaple</p>
             <p>{{ forecast[0].uv ? Math.round( forecast[0].uv ) : "" }}</p>
             <p>{{ forecast[0].uv }}</p>
-            <p>{{forecast[0].weather.description}}</p>
+            <p>{{ forecast[0].weather.description }}</p>
 
             <p>{{forecast[0].description_icon}}</p>
 
