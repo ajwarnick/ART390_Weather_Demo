@@ -1,5 +1,5 @@
-.degree_symbol {
-    display: none;
+.degree_symbol:not(:empty)::after {
+    content: "°"
 }
 
 .owm-legend-item{
@@ -9,9 +9,4 @@
 #map {
 	width: 600px;
     height: 600px;
-<<<<<<< HEAD
 }
-
-=======
-}
->>>>>>> 1704191eb94af38f97db4d439fbab8d145543ab9

@@ -1,10 +1,6 @@
+// TODO 
+// have students set default zip and fill it to their id 
 
-// TODO
-// Add day of the week of for forcast
-// Hour for hourly
-// Feelslike
-// Forcast Icon id
-// air quality
 
 let nws; 
 /* ZIP CODE FUNCTIONS */
@@ -53,6 +49,7 @@ var weather = {
 			current: "",
 			high: "",
 			low: "",
+			feelslike: "",
 		},
 		wind: {
 			speed: "",
@@ -63,11 +60,12 @@ var weather = {
 		humidity: "",
 		pressure:"",
 		cloud_cover: "",
+		uv: "",
+		air_quality: "",
 
 		parcipitation: {
 			rain: "",
 			snow: "",
-
 		},
 
 		sunrise: "",
@@ -122,6 +120,7 @@ function zipTest() {
 			zip = found[0];
 			weather.location.zip = zip; 
 			getCurrent(zip);
+			getAltCurrent(zip);
 			getForecast(zip);
         }
     }
@@ -145,7 +144,8 @@ function getCurrent(z) {
         .then(function (myJson) {
 			mapCurrentResultsToState(myJson);
 			if(myJson.coord.lat !== undefined && myJson.coord.lon !== undefined){
-				getHourlyForcast( myJson.coord.lat, myJson.coord.lon);
+				getHourlyForcast( myJson.coord.lat, myJson.coord.lon );
+				getCurrentUV( myJson.coord.lat, myJson.coord.lon );
 				destroyMap();
 				my_initMap( myJson.coord.lat, myJson.coord.lon, 9 );
 			}
@@ -156,7 +156,7 @@ function getCurrent(z) {
 
 function mapCurrentResultsToState(j) {
 
-	if (j.cod === "404" || j.cod === "401" ) {
+	if (j.cod == "404" || j.cod == "401" ) {
 		weather.error = j.message;
     } else {
 		weather.location.name = j.name;
@@ -185,6 +185,19 @@ function mapCurrentResultsToState(j) {
 
 }
 
+function getAltCurrent(zip){
+	let toFetchAltCurrent = "https://api.weatherbit.io/v2.0/current?&postal_code="+zip+"&country=US&key="+Keys.weatherbit;
+
+	fetch(toFetchAltCurrent)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (myJson) {
+			weather.current.temp.feelslike = celsiusToFahrenheit(myJson.data[0].app_temp);
+			weather.current.air_quality = myJson.data[0].aqi;
+        });
+}
+
 
 
 function getForecast(z) {
@@ -202,14 +215,37 @@ function getForecast(z) {
 }
 
 function mapForecastResultsToState(j) {
-	if (j.cod === "404" || j.cod === "401" ) {
+	if (j.cod == "404" || j.cod == "401" ) {
 		weather.error = j.message;
     } else {
-		console.log(j);
 		weather.forecast = [];
 		j.data.forEach(function(element) {
+			element['weekday'] = getDayOfWeek(element.datetime);
+
+			// set icon 
+			if( element.weather.code == '800' ){
+				element['description_icon'] = "01d";
+			}else if( element.weather.code == '801' ){
+				element['description_icon'] = "02d";
+			}else if( element.weather.code == '802' ){
+				element['description_icon'] = "03d";
+			}else if( element.weather.code == '803' || element.weather.code == '804'  ){
+				element['description_icon'] = "04d";
+			}else if( element.weather.code == '300' || element.weather.code == '301' || element.weather.code == '302'  ){
+				element['description_icon'] = "09d";
+			}else if( element.weather.code == '500' || element.weather.code == '501' || element.weather.code == '511' || element.weather.code == '520' || element.weather.code == '521' || element.weather.code == '522' || element.weather.code == '900' ){
+				element['description_icon'] = "10d";
+			}else if( element.weather.code == '200' || element.weather.code == '201' || element.weather.code == '202' || element.weather.code == '230' || element.weather.code == '231' || element.weather.code == '232' || element.weather.code == '233' ){
+				element['description_icon'] = "11d";
+			}else if( element.weather.code == '600' || element.weather.code == '601' || element.weather.code == '602' || element.weather.code == '610' || element.weather.code == '611' || element.weather.code == '612' || element.weather.code == '621' || element.weather.code == '622' || element.weather.code == '623' ){
+				element['description_icon'] = "13d";
+			}else if( element.weather.code == '700' || element.weather.code == '711' || element.weather.code == '721' || element.weather.code == '731' || element.weather.code == '741' || element.weather.code == '751' ){
+				element['description_icon'] = "50d";
+			}
+
 			weather.forecast.push(element);
 			weather.location.state = j.state_code;
+
 		});
     }
 }
@@ -234,8 +270,27 @@ function getHourlyForcast( lat, lon ){
         })
         .then(function(myJson) {
 			weather.hourly = myJson.properties.periods;
-        })
+			weather.hourly.forEach(function(element) {
+				var d = new Date(element.startTime);
+				element['time'] = formatDate(d, "h:mmtt");
+			  });
+
+		})
+		  
     });
+}
+
+
+function getCurrentUV( lat, lon ){
+	let toFetch = "http://api.openweathermap.org/data/2.5/uvi?appid=" + Keys.openweathermap + "&lat=" + lat + "&lon=" + lon;
+
+	fetch(toFetch)
+    .then(function(response) {
+		return response.json();
+    })
+    .then(function(myJson) {
+        weather.current.uv = myJson.value;
+    })
 }
 
 
@@ -311,6 +366,16 @@ function kelvinToFahrenheit(tempK) {
     let tempF = parseInt((tempK * 1.8) - 459.67, 10);
     return tempF;
 }
+
+function celsiusToFahrenheit(tempC) {
+	let tempF = parseInt((tempC * 1.8) + 32);
+	return tempF;
+}
+
+function getDayOfWeek(date) {
+	var dayOfWeek = new Date(date).getDay();    
+	return isNaN(dayOfWeek) ? null : ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'][dayOfWeek];
+  }
 
 function formatDate(date, format, utc) {
     var MMMM = ["\x00", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];

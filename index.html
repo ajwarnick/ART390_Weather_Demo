@@ -36,48 +36,60 @@
 
             <h1>TIME</h1>
             <p v-bind:class="time.day">{{time.day}}</p>
-            <p>{{time.date}}</p>
-            <p>{{time.hour_12}} : {{time.minute}} : {{time.seconds}} {{time.ampm}}</p>
+            <p class="date">{{time.date}}</p>
+            <p class="time">{{time.hour_12}}:{{time.minute}}:{{time.seconds}} {{time.ampm}}</p>
             <p v-bind:class="time.moom">{{time.moom}}</p>
 
             <h1>META</h1>
-            <p>{{city}}</p>
+            <p class="city">{{city}}</p>
 
-            <p>{{location.zip}}</p>
-            <p>{{location.coord.lat}}</p>
-            <p>{{location.coord.lon}}</p>
-            <p>{{location.name}}</p>
-            <p>{{location.state}}</p>
+            <p class="zip">{{location.zip}}</p>
+            <p class="latitude">{{location.coord.lat}}</p>
+            <p class="longitude">{{location.coord.lon}}</p>
+            <p class="city">{{location.name}}</p>
+            <p class="state">{{location.state}}</p>
 
             <p>{{error}}</p>
 
 
+
+
+
+
+
             <h1>CURRENT</h1>
-            <p>{{current.description_main}}</p>
-            <p>{{current.description_long}}</p>
-            <p>{{current.description_icon}}</p>
+            <p class="description">{{current.description_main}}</p>
+            <p class="description_long">{{current.description_long}}</p>
+            <p class="icon">{{current.description_icon}}</p>
 
-            <p class="degree_symbol">{{current.temp.current}}</p>
-            <p class="degree_symbol">{{current.temp.high}}</p>
-            <p class="degree_symbol">{{current.temp.low}}</p>
+            <p class="degree_symbol current">{{current.temp.current}}</p>
+            <p class="degree_symbol high">{{current.temp.high}}</p>
+            <p class="degree_symbol low">{{current.temp.low}}</p>
 
-            <p>{{current.wind.speed}}</p>
-            <p class="degree_symbol">{{current.wind.degree}}</p>
-            <p>{{current.cloud_cover}}</p>
+            <p class="degree_symbol feelslike">{{current.temp.feelslike}}</p>
+            <p class="windspeed">{{current.wind.speed}}</p>
+            <p class="cloudcover">{{current.cloud_cover}}</p>
 
-            <p>{{current.rain}}</p>
-            <p>{{current.snow}}</p>
+            <p class="rain">{{current.rain}}</p>
+            <p class="snow">{{current.snow}}</p>
 
-            <p>{{current.pressure}}</p>
-            <p>{{current.humidity}}</p>
+            <p class="pressure">{{current.pressure}}</p>
+            <p class="humidity">{{current.humidity}}</p>
 
-            <p>{{current.sunrise}}</p>
-            <p>{{current.sunset}}</p>
+            <p class="sunrise">{{current.sunrise}}</p>
+            <p class="sunset">{{current.sunset}}</p>
+
+            <p class="uv">{{current.uv}}</p>
+            <p class="air_quality">{{current.air_quality}}</p>
+
+
+
 
 
             <h1>HOURLY</h1>
             <h4>Hour 1</h4>
             <p>{{hourly[0].isDaytime ? 'Day' : 'Night' }}</p>
+            <p>{{hourly[0].time}}</p>
             <p>{{hourly[0].number}}</p>
             <p>{{hourly[0].shortForecast}}</p>
             <p>{{hourly[0].startTime}}</p>
@@ -85,15 +97,21 @@
             <p>{{hourly[0].emperatureTrend}}</p>
             <p>{{hourly[0].windSpeed}}</p>
             <p>{{hourly[0].windDirection}}</p>
+            <p>hi</p>
+            <p>{{hourly[0].app_temp}}</p>
 
             <h1>FORECAST</h1>
             <h4>Day 1</h4>
+            <h6>{{forecast[0].weekday}}</h6>
             <p  class="degree_symbol">High - {{forecast[0].max_temp}}</p>
             <p  class="degree_symbol">Low - {{forecast[0].min_temp}}</p>
             <p>exmaple</p>
             <p>{{ forecast[0].uv ? Math.round( forecast[0].uv ) : "" }}</p>
             <p>{{ forecast[0].uv }}</p>
             <p>{{forecast[0].weather.description}}</p>
+
+            <p>{{forecast[0].description_icon}}</p>
+            
 
             <p>{{forecast[0].wind_spd}} mph</p>
             <p>{{forecast[0].wind_cdir_full}}</p>
