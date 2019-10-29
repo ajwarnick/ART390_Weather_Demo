@@ -2,6 +2,11 @@
     content: "°"
 }
 
+img{
+    max-width: 100%;
+    max-height: 100%;
+}
+
 .owm-legend-item{
     display: none;
 }
@@ -11,6 +16,89 @@
     height: 600px;
 }
 
+.icon{
+    max-width: 50px;
+    max-height: 50px;
+}
 
+.icon-01d{
+    background-image: url("/img/01d.png");
+    background-repeat: no-repeat; 
+    background-position: center;
+    background-size: cover;
+    width: 100px;
+    height: 100px;
+}
 
-.icon-
+.icon-02d{
+    background-image: url("/img/02d.png");
+    background-repeat: no-repeat; 
+    background-position: center;
+    background-size: cover;
+    width: 100px;
+    height: 100px;   
+}
+
+.icon-03d{
+    background-image: url("/img/03d.png");   
+    background-repeat: no-repeat; 
+    background-position: center;
+    background-size: cover;
+    width: 100px;
+    height: 100px;
+}
+
+.icon-04d{
+    background-image: url("/img/04d.png"); 
+    background-repeat: no-repeat; 
+    background-position: center;
+    background-size: cover;
+    width: 100px;
+    height: 100px;  
+}
+
+.icon-09d{
+    background-image: url("/img/09d.png");   
+    background-repeat: no-repeat; 
+    background-position: center;
+    background-size: cover;
+    width: 100px;
+    height: 100px;
+}
+
+.icon-10d{
+    background-image: url("/img/10d.png");  
+    background-repeat: no-repeat; 
+    background-position: center;
+    background-size: cover;
+    width: 100px;
+    height: 100px; 
+}
+
+.icon-11d{
+    background-image: url("/img/11d.png");   
+    background-repeat: no-repeat; 
+    background-position: center;
+    background-size: cover;
+    width: 100px;
+    height: 100px;
+}
+
+.icon-13d{
+    background-image: url("/img/13d.png");  
+    background-repeat: no-repeat; 
+    background-position: center;
+    background-size: cover;
+    width: 100px;
+    height: 100px; 
+}
+
+.icon-50d{
+    background-image: url("/img/50d.png");  
+    background-repeat: no-repeat; 
+    background-position: center;
+    background-size: cover;
+    width: 100px;
+    height: 100px; 
+}
+

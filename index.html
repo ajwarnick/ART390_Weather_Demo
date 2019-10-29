@@ -103,6 +103,13 @@
 
             <p>{{forecast[0].description_icon}}</p>
 
+
+            <div class="icon">
+                <img v-bind:src="'/img/' + forecast[0].description_icon + '.png'" v-bind:alt="forecast[0].weather.description">
+            </div>
+
+            <div v-bind:class="'icon-'+forecast[0].description_icon"></div>
+
             <p>{{forecast[0].wind_spd}} mph</p>
             <p>{{forecast[0].wind_cdir_full}}</p>
             <p>{{forecast[0].wind_cdir}}</p>
@@ -118,7 +125,17 @@
             <p>{{forecast[0].dewpt}}</p>
             <p>{{forecast[0].pres}} mb</p>
 
-            <div></div>
+            <div class="icon-01d"></div>
+            <div class="icon-02d"></div>
+            <div class="icon-03d"></div>
+            <div class="icon-04d"></div>
+            <div class="icon-09d"></div>
+            <div class="icon-10d"></div>
+            <div class="icon-11d"></div>
+            <div class="icon-13d"></div>
+            <div class="icon-50d"></div>
+
+
         </div>
         <div id="map"></div>
 
