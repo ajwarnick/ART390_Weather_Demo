@@ -27,10 +27,7 @@
     </head>
 
     <body>
-
         <div class="results" id="app">
-
-
             <input placeholder="Enter Your ZIP Code" v-on:input="zip_trigger" name="name" id="zip" />
 
 
@@ -50,12 +47,6 @@
             <p class="state">{{location.state}}</p>
 
             <p>{{error}}</p>
-
-
-
-
-
-
 
             <h1>CURRENT</h1>
             <p class="description">{{current.description_main}}</p>
@@ -111,7 +102,6 @@
             <p>{{forecast[0].weather.description}}</p>
 
             <p>{{forecast[0].description_icon}}</p>
-            
 
             <p>{{forecast[0].wind_spd}} mph</p>
             <p>{{forecast[0].wind_cdir_full}}</p>
@@ -127,6 +117,8 @@
 
             <p>{{forecast[0].dewpt}}</p>
             <p>{{forecast[0].pres}} mb</p>
+
+            <div></div>
         </div>
         <div id="map"></div>
 
