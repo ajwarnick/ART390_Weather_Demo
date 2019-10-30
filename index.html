@@ -103,7 +103,8 @@
 
 
             <div class="icon">
-                <img v-bind:src="'/img/' + forecast[0].description_icon + '.png'" v-bind:alt="forecast[0].weather.description">
+                <img v-bind:src="'/img/' + forecast[0].description_icon + '.png'" 
+                v-bind:alt="forecast[0].weather.description">
             </div>
 
             <div v-bind:class="'icon-'+forecast[0].description_icon"></div>
