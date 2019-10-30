@@ -1,0 +1,199 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-size:1.5vh;
+}
+
+.degree_symbol:not(:empty)::after {
+    content: "°"
+}
+
+.owm-legend-item{
+    display: none;
+}
+
+#map {
+	width: 600px;
+    height: 600px;
+}
+
+
+#zip{
+    width:90vw;
+    margin: auto;
+    display: block;
+    border: 0;
+    border-bottom:5px solid black;
+    text-align: center;
+    font-size: 3.8em;
+    line-height: 1em;
+}
+
+.meta_bar{
+    width:90vw;
+    margin: auto;
+    padding-top: 10px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.name{
+    text-align: left;
+}
+.latlon{
+    text-align: right;
+}
+
+
+.sidebar_left{
+    width: 80vh;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    display: grid;
+    border-bottom:5px solid black;
+    grid-template-columns: 1fr 1fr;
+
+    transform-origin: top left;
+    transform: rotate(-90deg);
+
+    position: fixed;
+    bottom:0;
+}
+
+.date{
+    text-align: left;
+}
+
+.time{
+    text-align: right;
+} 
+
+
+.sidebar_right{
+    width: 80vh;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    display: grid;
+    border-bottom:5px solid black;
+    grid-template-columns: 1fr 1fr;
+
+    transform-origin: top right;
+    transform: rotate(90deg);
+
+    position: fixed;
+    bottom:0;
+    right: 0;
+}
+
+.sunrise{
+    text-align: left;
+}
+
+.sunset{
+    text-align: right;
+}
+
+.current{
+    width: 40vw;
+    margin: auto;
+
+    border: 1px dotted red;
+    text-align: center;
+
+    margin-top: 3em;
+}
+
+.current_temp{
+    font-size: 20vh;
+}
+
+.current_description{
+    font-size: 2vh;
+}
+
+
+
+
+
+.current_secondary{
+    width:90vw;
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 30vh;
+}
+
+.meta_1{
+    text-align: left;
+}
+
+.meta_2{
+    text-align: right;
+}
+
+
+.forcast{
+    width: 90vw;
+    margin: auto;
+    margin-top: 5vh;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-column-gap: 50px;
+}
+
+.day{
+    border: 5px solid black;
+}
+
+.weekday{
+    float: left;
+    width: 50%;
+    padding-bottom: 5vh;
+}
+
+.high_low{
+    float: left;
+    width: 50%;
+    padding-bottom: 5vh;
+    text-align: right;
+}
+
+.precipitation{
+    padding-bottom: 5vh;
+}
+
+.alerts{
+    position: fixed;
+    left: calc(5vw - 5px);
+    top: 15vh;
+    border: 5px solid red;
+    width:90vw;
+    height: 80vh;
+    background: #ffb0b0;
+
+}
+
+.close{
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: red;
+    font-size: 3em;
+    cursor: pointer;
+
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Opera and Firefox */
+}
+
+.close:hover{
+    color: black;
+}
