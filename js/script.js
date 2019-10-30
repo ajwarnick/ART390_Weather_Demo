@@ -463,12 +463,28 @@ function formatDate(date, format, utc) {
 
 
 
+/* 	CLOSE ITEMS WITH CLOSE DIV */	
+
+var close = document.getElementsByClassName('close')
+
+for (var i = 0; i < close.length; i++) {
+	close[i].addEventListener("click",  (event) => {
+		console.log(event);
+    	// e.currentTarget.parentNode.remove();
+		//this.closest('.single').remove() // in modern browsers in complex dom structure
+		//this.parentNode.remove(); //this refers to the current target element 
+		//e.target.parentNode.parentNode.removeChild(e.target.parentNode);
+	}, false);
+}
 
 
+function modifyText() {
+	console.log("hi")
+}
 
-
-
-
+  
+var el = document.getElementById("test");
+el.addEventListener("click", modifyText, false);
 
 
 

@@ -4,6 +4,14 @@ body{
     font-size:1.5vh;
 }
 
+input[type="text"], textarea {
+    background-color : white; 
+}
+
+input:focus, textarea:focus, select:focus{
+    outline: none;
+}
+
 .degree_symbol:not(:empty)::after {
     content: "°"
 }
@@ -13,8 +21,9 @@ body{
 }
 
 #map {
-	width: 600px;
+	width: 90vw;
     height: 600px;
+    margin: 50px auto;
 }
 
 
@@ -99,7 +108,6 @@ body{
     width: 40vw;
     margin: auto;
 
-    border: 1px dotted red;
     text-align: center;
 
     margin-top: 3em;
