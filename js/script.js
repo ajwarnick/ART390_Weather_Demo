@@ -1,5 +1,23 @@
 // TODO 
+
+// v1
+// add moon to forcast
+
+// v2
+// use a normalize css 
 // have students set default zip and fill it to their id 
+// get more info from NOA 
+// add event listener for close
+// more methods students may need ???
+// add cookie set and retrieve 						https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie
+// add parms for zip
+// add alerts
+
+// v3 
+// add other types of search 
+// move script to cdn etc for always up to date version release system
+// min and deploy system for js
+// get mothods written by students and add those dynamically to the vue methods 
 
 
 let nws; 
