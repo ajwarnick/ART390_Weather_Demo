@@ -934,6 +934,11 @@ var vm = new Vue({
 	methods: {
 		zip_trigger: function (){
 			myzip();
+		},
+		closeParent: function (el){
+			console.log(el);
+			el.target.parentNode.remove();
+
 		}
 	}
 })
