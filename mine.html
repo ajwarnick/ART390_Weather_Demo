@@ -37,10 +37,11 @@
         <div class="results" id="app">
             <input placeholder="Enter Your ZIP Code" v-on:input="zip_trigger" name="name" id="zip" />
             <div class="alerts">
-                <div class="close">X</div>
+                <div class="close" v-on:click="closeParent">X</div>
                 alert
             </div>
-            <div class="meta_bar">
+
+            <!-- <div class="meta_bar">
                 <div class="name">Kansas City <p id="zip_display"></p></div>
                 <div class="latlon">100, 97</div>
             </div>
@@ -132,7 +133,7 @@
             </div>
 
 
-            <!-- <h1>TIME</h1>
+            <h1>TIME</h1>
             <p>{{time.day}}</p>
             <p>{{time.date}}</p>
             <p>{{time.hour_12}} : {{time.minute}} : {{time.seconds}} {{time.ampm}}</p>
