@@ -22,16 +22,13 @@
         <script src="/js/libraries/leaflet/leaflet-openweathermap.js"></script>
         <script src="/js/libraries/leaflet/leaflet-languageselector.js"></script>
 
+        <link href="https://fonts.googleapis.com/css?family=Yatra+One&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="/style.css">
         <link rel="stylesheet" href="/mine.css">
     </head>
 
     <body>
 
-
-
-        
-        
 
 
         <div class="results" id="app">
@@ -41,99 +38,120 @@
                 alert
             </div>
 
-            <!-- <div class="meta_bar">
-                <div class="name">Kansas City <p id="zip_display"></p></div>
-                <div class="latlon">100, 97</div>
+            <div class="meta_bar">
+                <div class="name">{{city}}, {{location.state}} <p id="zip_display"></p></div>
+                <div class="latlon">{{location.coord.lat}}, {{location.coord.lon}}</div>
             </div>
             <div class="sidebar_left">
-                <div class="date">2019-10-17</div>
-                <div class="time">9:56:00</div>
+                <div class="date">{{time.date}}</div>
+                <div class="time">{{time.hour_12}}:{{time.minute}}:{{time.seconds}}</div>
             </div>
             <div class="sidebar_right">
-                <div class="sunrise">sunrise</div>
-                <div class="sunset">sunset</div>
+                <div class="sunrise">{{current.sunrise}}</div>
+                <div class="sunset">{{current.sunset}}</div>
             </div>
             <div class="current">
-                <div class="current_temp degree_symbol">71</div>
-                <div class="current_description">Cloudy</div>
+                <div class="current_temp degree_symbol">{{current.temp.current}}</div>
+                <div class="current_description">{{current.description_long}}</div>
             </div>
 
-            <div class="wind">
-
+            <div class="wind" v-bind:style="[current.wind.degree ? 'display: block;' : 'display:none;'] + 'transform: translateX(-50%) translateY(-50%) rotate( calc(90deg + ' + current.wind.degree + 'deg) );'">
+                <span class="wind_speed">{{current.wind.speed}}</span>
             </div>
             <div class="current_secondary">
                 <div class="meta_1">
-                    <p class="pressure">Pressure</p>
-                    <p class="air_quality">Air Quality</p>
-                    <p class="dew_point">Dew Point</p>
+                    <p class="pressure">
+                        <span class="data">{{current.pressure}}</span>
+                        <span class="label">Pressure</span>
+                    </p>
+                    <p class="air_quality">
+                        <span class="data">{{current.air_quality}}</span>
+                        <span class="label">Air Quality</span>
+                    </p>
+                    <p class="uv_index">
+                        <span class="data">{{current.uv}}</span>
+                        <span class="label">UV Index</span>
+                    </p>
                 </div>
                 <div class="meta_2">
-                    <p class="uv_index">UV Index</p>
-                    <p class="cloud">Cloud</p>
-                    <p class="coverage">Coverage</p>
-                    <p class="visibility">Visibility</p>
-                    <p class="humidity">Humidity</p>
+                    <p class="cloud_coverage">
+                        <span class="label">Cloud Coverage</span>
+                        <span class="data">{{current.cloud_cover}}%</span>
+                    </p>
+                    <p class="visibility">
+                        <span class="label">Visibility</span>
+                        <span class="data"></span>
+                    </p>
+                    <p class="humidity">
+                        <span class="label">Humidity</span>
+                        <span class="data"></span>
+                    </p>
                 </div>
             </div>
             <div class="forcast">
                 <div class="day">
-                    <div class="weekday">Mon</div>
-                    <div class="high_low">72/55</div>
+                    <div class="weekday">{{forecast[1].weekday}}</div>
+                    <div class="high_low">{{forecast[1].max_temp}}/{{forecast[1].min_temp}}</div>
+                    <div v-bind:class="'icon_'+forecast[1].description_icon" class="icon"></div>
                     <div class="precipitation">
-                        <span class="rain">Rain</span>
-                        <span class="snow">Snow</span>
-                        <span class="likelihood">Likelihood</span>
+                        <!-- <span class="rain">rain: {{forecast[1].precip}}</span>
+                        <span class="snow">snow: {{forecast[1].snow}}</span> -->
+                        <span class="likelihood">{{forecast[1].pop}}%</span>
                     </div>
-                    <div class="description">Description</div>
+                    <div class="description">{{forecast[1].weather.description}}</div>
                 </div>
 
                 <div class="day">
-                    <div class="weekday">Mon</div>
-                    <div class="high_low">72/55</div>
+                    <div class="weekday">{{forecast[2].weekday}}</div>
+                    <div class="high_low">{{forecast[2].max_temp}}/{{forecast[2].min_temp}}</div>
+                    <div v-bind:class="'icon_'+forecast[2].description_icon" class="icon"></div>
                     <div class="precipitation">
-                        <span class="rain">Rain</span>
-                        <span class="snow">Snow</span>
-                        <span class="likelihood">Likelihood</span>
+                        <!-- <span class="rain">rain: {{forecast[2].precip}}</span>
+                        <span class="snow">snow: {{forecast[2].snow}}</span> -->
+                        <span class="likelihood">{{forecast[2].pop}}%</span>
                     </div>
-                    <div class="description">Description</div>
+                    <div class="description">{{forecast[2].weather.description}}</div>
                 </div>
 
                 <div class="day">
-                    <div class="weekday">Mon</div>
-                    <div class="high_low">72/55</div>
+                    <div class="weekday">{{forecast[3].weekday}}</div>
+                    <div class="high_low">{{forecast[3].max_temp}}/{{forecast[3].min_temp}}</div>
+                    <div v-bind:class="'icon_'+forecast[3].description_icon" class="icon"></div>
                     <div class="precipitation">
-                        <span class="rain">Rain</span>
-                        <span class="snow">Snow</span>
-                        <span class="likelihood">Likelihood</span>
+                        <!-- <span class="rain">rain: {{forecast[3].precip}}</span>
+                        <span class="snow">snow: {{forecast[3].snow}}</span> -->
+                        <span class="likelihood">{{forecast[3].pop}}%</span>
                     </div>
-                    <div class="description">Description</div>
+                    <div class="description">{{forecast[3].weather.description}}</div>
                 </div>
 
                 <div class="day">
-                    <div class="weekday">Mon</div>
-                    <div class="high_low">72/55</div>
+                    <div class="weekday">{{forecast[4].weekday}}</div>
+                    <div class="high_low">{{forecast[4].max_temp}}/{{forecast[4].min_temp}}</div>
+                    <div v-bind:class="'icon_'+forecast[4].description_icon" class="icon"></div>
                     <div class="precipitation">
-                        <span class="rain">Rain</span>
-                        <span class="snow">Snow</span>
-                        <span class="likelihood">Likelihood</span>
+                        <!-- <span class="rain">rain: {{forecast[4].precip}}</span>
+                        <span class="snow">snow: {{forecast[4].snow}}</span> -->
+                        <span class="likelihood">{{forecast[4].pop}}%</span>
                     </div>
-                    <div class="description">Description</div>
+                    <div class="description">{{forecast[4].weather.description}}</div>
                 </div>
 
                 <div class="day">
-                    <div class="weekday">Mon</div>
-                    <div class="high_low">72/55</div>
+                    <div class="weekday">{{forecast[5].weekday}}</div>
+                    <div class="high_low">{{forecast[5].max_temp}}/{{forecast[5].min_temp}}</div>
+                    <div v-bind:class="'icon_'+forecast[5].description_icon" class="icon"></div>
                     <div class="precipitation">
-                        <span class="rain">Rain</span>
-                        <span class="snow">Snow</span>
-                        <span class="likelihood">Likelihood</span>
+                        <!-- <span class="rain">rain: {{forecast[5].precip}}</span>
+                        <span class="snow">snow: {{forecast[5].snow}}</span> -->
+                        <span class="likelihood">{{forecast[5].pop}}%</span>
                     </div>
-                    <div class="description">Description</div>
+                    <div class="description">{{forecast[5].weather.description}}</div>
                 </div>
             </div>
 
 
-            <h1>TIME</h1>
+            <!-- <h1>TIME</h1>
             <p>{{time.day}}</p>
             <p>{{time.date}}</p>
             <p>{{time.hour_12}} : {{time.minute}} : {{time.seconds}} {{time.ampm}}</p>
@@ -204,7 +222,7 @@
             <p>{{forecast[0].pres}} mb</p> -->
 
         </div>
-        <div id="map"></div>
+        <!-- <div id="map"></div> -->
 
 
 
