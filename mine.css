@@ -3,7 +3,7 @@ body{
     padding: 0;
     font-size:1.5vh;
 
-    font-family: 'Eczar', serif;
+    font-family: 'Yatra One', cursive;
 
 }
 
@@ -35,10 +35,15 @@ input:focus, textarea:focus, select:focus{
     margin: auto;
     display: block;
     border: 0;
-    border-bottom:5px solid black;
+    border-bottom:10px solid black;
     text-align: center;
     font-size: 3.8em;
     line-height: 1em;
+    font-family: 'Yatra One', cursive;
+
+    position: fixed;
+    top: 0;
+    left: 5vw;
 }
 
 .meta_bar{
@@ -48,6 +53,10 @@ input:focus, textarea:focus, select:focus{
 
     display: grid;
     grid-template-columns: 1fr 1fr;
+    position: fixed;
+    top: 5vw;
+    left: 5vw;
+    z-index: 9;
 }
 .name{
     text-align: left;
@@ -57,13 +66,49 @@ input:focus, textarea:focus, select:focus{
 }
 
 
+
+.wind {
+    display: none;
+    border: 10px solid blue;
+    width: 50vw;
+    position: absolute;
+    left: 50%;
+    top: 50%;    
+    z-index: 10;
+}
+
+.wind_speed{
+  
+  position: absolute;
+  top:-12px;
+  right: -60px;
+  color:blue;
+  transform: rotate(270deg);
+}
+
+.wind:after{
+  content: "";
+  width: 0; 
+  height: 0; 
+  border-top: 40px solid transparent;
+  border-bottom: 40px solid transparent; 
+  
+  border-right:40px solid blue;
+  position: absolute;
+  top:-40px;
+  left: -80px;
+  
+}
+
+
+
 .sidebar_left{
     width: 80vh;
     padding-top: 10px;
     padding-bottom: 10px;
 
     display: grid;
-    border-bottom:5px solid black;
+    border-bottom:10px solid black;
     grid-template-columns: 1fr 1fr;
 
     transform-origin: top left;
@@ -88,7 +133,7 @@ input:focus, textarea:focus, select:focus{
     padding-bottom: 10px;
 
     display: grid;
-    border-bottom:5px solid black;
+    border-bottom:10px solid black;
     grid-template-columns: 1fr 1fr;
 
     transform-origin: top right;
@@ -116,9 +161,14 @@ input:focus, textarea:focus, select:focus{
     margin-top: 3em;
 }
 
+
+
 .current_temp{
     font-size: 30vh;
+<<<<<<< HEAD
     line-height: 1em;
+=======
+>>>>>>> fdeba9d0f8d03e15515e5eac28af59d8e208faa8
 }
 
 .current_description{
@@ -135,15 +185,32 @@ input:focus, textarea:focus, select:focus{
 
     display: grid;
     grid-template-columns: 1fr 1fr;
-    margin-top: 30vh;
+    margin-top: 15vh;
 }
 
 .meta_1{
     text-align: left;
 }
 
+.meta_1 .label{
+    text-align: right;
+}
+
 .meta_2{
     text-align: right;
+}
+
+.meta_2 .label{
+    text-align: left;
+}
+
+.data{
+    min-width: 40px;
+    display:inline-block
+}
+.label{
+    min-width: 150px;
+    display:inline-block;
 }
 
 
@@ -151,7 +218,7 @@ input:focus, textarea:focus, select:focus{
     width: 90vw;
     margin: auto;
     margin-top: 5vh;
-
+    margin-bottom: 5vh;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-column-gap: 50px;
@@ -159,34 +226,55 @@ input:focus, textarea:focus, select:focus{
 
 .day{
     border: 5px solid black;
+    padding: 5px;
 }
 
-.weekday{
+.day .description{
     float: left;
-    width: 50%;
-    padding-bottom: 5vh;
-}
-
-.high_low{
-    float: left;
-    width: 50%;
-    padding-bottom: 5vh;
+    width: 80%;
     text-align: right;
 }
 
-.precipitation{
-    padding-bottom: 5vh;
+.day .precipitation{
+    /* padding-bottom: 5vh; */
+    float: left;
+    width: 20%;
+    /* padding-top: 5vh; */
 }
+
+.icon{
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 75%;
+    height: 150px;
+
+}
+
+.day .weekday{
+    float: left;
+    width: 50%;
+    /* padding-bottom: 5vh; */
+}
+
+.day .high_low{
+    float: left;
+    width: 50%;
+    /* padding-bottom: 5vh; */
+    text-align: right;
+}
+
+
 
 .alerts{
     position: fixed;
     left: calc(5vw - 5px);
-    top: 15vh;
+    top: 7vh;
     border: 5px solid red;
     width:90vw;
-    height: 80vh;
+    height: 90vh;
     background: #ffb0b0;
-
+    z-index: 20;
 }
 
 .close{

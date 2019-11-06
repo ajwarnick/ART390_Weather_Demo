@@ -16,89 +16,82 @@ img{
     height: 600px;
 }
 
-.icon{
-    max-width: 50px;
-    max-height: 50px;
-}
 
-.icon-01d{
+.icon_01d{
     background-image: url("/img/01d.png");
     background-repeat: no-repeat; 
     background-position: center;
     background-size: cover;
-    width: 100px;
-    height: 100px;
 }
 
-.icon-02d{
+.icon_02d{
     background-image: url("/img/02d.png");
     background-repeat: no-repeat; 
     background-position: center;
     background-size: cover;
-    width: 100px;
-    height: 100px;   
 }
 
-.icon-03d{
+.icon_03d{
     background-image: url("/img/03d.png");   
     background-repeat: no-repeat; 
     background-position: center;
     background-size: cover;
-    width: 100px;
-    height: 100px;
 }
 
-.icon-04d{
+.icon_04d{
     background-image: url("/img/04d.png"); 
     background-repeat: no-repeat; 
     background-position: center;
     background-size: cover;
-    width: 100px;
-    height: 100px;  
 }
 
-.icon-09d{
+.icon_09d{
     background-image: url("/img/09d.png");   
     background-repeat: no-repeat; 
     background-position: center;
     background-size: cover;
-    width: 100px;
-    height: 100px;
 }
 
-.icon-10d{
+.icon_10d{
     background-image: url("/img/10d.png");  
     background-repeat: no-repeat; 
     background-position: center;
     background-size: cover;
-    width: 100px;
-    height: 100px; 
 }
 
-.icon-11d{
+.icon_11d{
     background-image: url("/img/11d.png");   
     background-repeat: no-repeat; 
     background-position: center;
     background-size: cover;
-    width: 100px;
-    height: 100px;
 }
 
-.icon-13d{
+.icon_13d{
     background-image: url("/img/13d.png");  
     background-repeat: no-repeat; 
     background-position: center;
     background-size: cover;
-    width: 100px;
-    height: 100px; 
 }
 
-.icon-50d{
+.icon_50d{
     background-image: url("/img/50d.png");  
     background-repeat: no-repeat; 
     background-position: center;
     background-size: cover;
-    width: 100px;
-    height: 200px; 
 }
 
+.yellow{
+    background-color: yellow;
+}
+
+.red{
+    background-color: red;
+}
+
+.green{
+    background-color: green;
+}
+
+.blue{
+    background-color: blue;
+}
