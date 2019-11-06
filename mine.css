@@ -2,6 +2,9 @@ body{
     margin: 0;
     padding: 0;
     font-size:1.5vh;
+
+    font-family: 'Eczar', serif;
+
 }
 
 input[type="text"], textarea {
@@ -114,7 +117,8 @@ input:focus, textarea:focus, select:focus{
 }
 
 .current_temp{
-    font-size: 20vh;
+    font-size: 30vh;
+    line-height: 1em;
 }
 
 .current_description{

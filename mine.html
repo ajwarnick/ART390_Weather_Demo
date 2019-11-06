@@ -22,6 +22,7 @@
         <script src="/js/libraries/leaflet/leaflet-openweathermap.js"></script>
         <script src="/js/libraries/leaflet/leaflet-languageselector.js"></script>
 
+        <link href="https://fonts.googleapis.com/css?family=Eczar:400,800&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="/style.css">
         <link rel="stylesheet" href="/mine.css">
     </head>
@@ -42,8 +43,8 @@
             </div> -->
 
             <div class="meta_bar">
-                <div class="name" id="test">Kansas City <p id="zip_display"></p></div>
-                <div class="latlon">{{location.coord.lat}}, {{location.coord.lon}}</div>
+                <div class="name" id="test">{{location.name}} | {{location.state}}<p id="zip_display"></p></div>
+                <div class="latlon">{{location.coord.lat}} | {{location.coord.lon}}</div>
             </div>
             <div class="sidebar_left">
                 <div class="date">{{time.date}}</div>
