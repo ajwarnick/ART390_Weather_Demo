@@ -7,20 +7,8 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Weather</title>
 
-        <link rel="stylesheet" href="/js/libraries/leaflet/leaflet.css" />
-        <link rel="stylesheet" href="/js/libraries/leaflet/leaflet-openweathermap.css" />
-        <link rel="stylesheet" href="/js/libraries/leaflet/leaflet-languageselector.css" />
-
-        <script src="/js/libraries/vue.min.js"></script>
         <script src="keys.js"></script>
-        <script src="/js/moon.js"></script>
-
-        <script src="/js/libraries/leaflet/leaflet.js"></script>
-        <script src="/js/libraries/leaflet/Permalink.js"></script>
-        <script src="/js/libraries/leaflet/Permalink.Layer.js"></script>
-        <script src="/js/libraries/leaflet/Permalink.Overlay.js"></script>
-        <script src="/js/libraries/leaflet/leaflet-openweathermap.js"></script>
-        <script src="/js/libraries/leaflet/leaflet-languageselector.js"></script>
+        <script src="https://unpkg.com/@warnick/forecast-js@1.2.0/js/forecast.js" defer></script>
 
 
         <link rel="stylesheet" href="/style.css">
@@ -92,6 +80,7 @@
             <h1>FORECAST</h1>
             <h4>Day 1</h4>
             <h6>{{forecast[0].weekday}}</h6>
+            <p>{{forecast[0].moon}}</p>
             <p  class="degree_symbol">High - {{forecast[0].max_temp}}</p>
             <p  class="degree_symbol">Low - {{forecast[0].min_temp}}</p>
             <p>exmaple</p>
@@ -141,6 +130,5 @@
         <div id="map"></div>
 
 
-        <script src="/js/script.js"></script>
     </body>
 </html>
