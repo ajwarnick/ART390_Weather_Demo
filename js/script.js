@@ -1,16 +1,16 @@
 // TODO 
 
 // v1
-// add moon to forcast
+// xxx add moon to forcast
 
 // v2
-// use a normalize css 
+// xxx use a normalize css 
 // have students set default zip and fill it to their id 
 // get more info from NOA 
-// add event listener for close
+// xxx add event listener for close
 // more methods students may need ???
-// add cookie set and retrieve 						https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie
-// add parms for zip
+// xxx add cookie set and retrieve 						https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie
+// xxx add parms for zip
 // add alerts
 
 // v3 
