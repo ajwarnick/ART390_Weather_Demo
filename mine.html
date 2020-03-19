@@ -7,20 +7,10 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Weather</title>
 
-        <script src="/js/libraries/vue.min.js"></script>
         <script src="keys.js"></script>
-        <script src="/js/moon.js"></script>
 
-        <link rel="stylesheet" href="/js/libraries/leaflet/leaflet.css" />
-        <link rel="stylesheet" href="/js/libraries/leaflet/leaflet-openweathermap.css" />
-        <link rel="stylesheet" href="/js/libraries/leaflet/leaflet-languageselector.css" />
-
-        <script src="/js/libraries/leaflet/leaflet.js"></script>
-        <script src="/js/libraries/leaflet/Permalink.js"></script>
-        <script src="/js/libraries/leaflet/Permalink.Layer.js"></script>
-        <script src="/js/libraries/leaflet/Permalink.Overlay.js"></script>
-        <script src="/js/libraries/leaflet/leaflet-openweathermap.js"></script>
-        <script src="/js/libraries/leaflet/leaflet-languageselector.js"></script>
+        <script src="https://unpkg.com/@warnick/forecast-js/js/forecast.min.js" defer></script>
+        <link rel="stylesheet" href="https://unpkg.com/@warnick/forecast-js/css/forecast.css">
 
         <link href="https://fonts.googleapis.com/css?family=Yatra+One&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="/style.css">
@@ -33,10 +23,10 @@
 
         <div class="results" id="app">
             <input placeholder="Enter Your ZIP Code" v-on:input="zip_trigger" name="name" id="zip" />
-            <div class="alerts">
+            <!-- <div class="alerts">
                 <div class="close" v-on:click="closeParent">X</div>
                 alert
-            </div>
+            </div> -->
 
             <div class="meta_bar">
                 <div class="name">{{city}}, {{location.state}} <p id="zip_display"></p></div>

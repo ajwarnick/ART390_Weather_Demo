@@ -49,7 +49,7 @@ input:focus, textarea:focus, select:focus{
 .meta_bar{
     width:90vw;
     margin: auto;
-    padding-top: 10px;
+    padding-top: 25px;
 
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -165,14 +165,11 @@ input:focus, textarea:focus, select:focus{
 
 .current_temp{
     font-size: 30vh;
-<<<<<<< HEAD
-    line-height: 1em;
-=======
->>>>>>> fdeba9d0f8d03e15515e5eac28af59d8e208faa8
 }
 
 .current_description{
     font-size: 2vh;
+    margin-top: 25px;
 }
 
 
