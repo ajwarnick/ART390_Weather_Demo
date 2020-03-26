@@ -1,5 +1,42 @@
+
+
+Location
+--------------
+Zip
+Coordinates 
+	Latitude
+	Longitude	
+City 
+State
+
+
+
+Alert
+--------------
+Banner Headline
+
+
+
+Time
+--------------
+Hour
+Minute
+Second
+AM/PM
+
+Timezone 
+Day
+Date
+Sunrise / Sunset
+Phase of Moon / Tide
+
+
+
 Current
 --------------
+Description Short
+Description Long
+Icon
 UV Index
 Wind Direction
 Wind Speed
@@ -12,10 +49,7 @@ Description
 Dew Point
 Air Quality
 Cloud Coverage
-Geographic location 
-	Latitude Longitude
-	Name
-	ZIP code
+
 
 Humidity 
 Visibility
@@ -29,10 +63,23 @@ Precipitation
 Radar
 Pressure
 
+
+
+
+Hourly
+--------------
+Day / Night
 Time
-Date
-Sunrise / Sunset
-Phase of Moon / Tide
+Number
+Short Forecast
+Start Time
+Temp
+Wind Speed
+Wind Direction 
+Icon
+
+
+
 
 
 Forecast
@@ -41,6 +88,7 @@ High / Low
 UV Index
 Alerts
 Description 
+Icon
 Air Quality
 Cloud Coverage
 Humidity
@@ -51,3 +99,10 @@ Precipitation
 
 Sunrise / Sunset	
 Phase of Moon / Tid
+
+
+
+
+
+Map
+---------------
