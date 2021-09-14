@@ -1,0 +1,24 @@
+[
+    {
+       "headline":"Beach Hazards Statement issued September 14 at 12:33PM PDT until September 15 at 9:00PM PDT by NWS Los Angeles/Oxnard CA",
+       "type":"Beach Hazards Statement",
+       "time_range":"2021-09-14T12:33:00-07:00",
+       "expires":"2021-09-15T05:00:00-07:00",
+       "instruction":"Remain out of the water due to hazardous swimming conditions, or\nstay near occupied lifeguard towers. Rock jetties can be deadly\nin such conditions, stay off the rocks.",
+       "description":"* WHAT...Dangerous rip currents and breaking waves are expected\ndue to elevated surf of 3 to 6 feet. Occasionally larger and\nsuddenly more powerful sets are possible.\n\n* WHERE...Coastal areas of Ventura and Los Angeles Counties.\n\n* WHEN...Through Wednesday evening.\n\n* IMPACTS...There is an increased risk of drowning. Rip currents\ncan pull swimmers out to sea. Waves can wash people off beaches\nand rocks, and capsize small boats nearshore. Very isolated and\nminor flooding of beaches around Zuma is possible during the\nevening high tides.",
+       "certainty":"Likely",
+       "severity":"Moderate",
+       "banner_headline":"Beach Hazards Statement"
+    },
+    {
+       "headline":"Beach Hazards Statement issued September 12 at 2:12PM PDT until September 15 at 9:00PM PDT by NWS Los Angeles/Oxnard CA",
+       "type":"Beach Hazards Statement",
+       "time_range":"2021-09-12T14:12:00-07:00",
+       "expires":"2021-09-13T05:00:00-07:00",
+       "instruction":"Remain out of the water due to hazardous swimming conditions, or\nstay near occupied lifeguard towers. Rock jetties can be deadly\nin such conditions, stay off the rocks.",
+       "description":"* WHAT...A moderately large and long period south swell will\nresult in elevated surf of 4 to 6 feet with local sets to 7\nfeet. Occasionally larger and suddenly more powerful sets are\npossible along with sneaker waves. Surf will be highest on\nexposed south and southwest facing beaches. There is also a high\nrisk of dangerous rip currents.\n\n* WHERE...Ventura County Coast, Los Angeles County Coast and\nCatalina and Santa Barbara Islands.\n\n* WHEN...From late tonight through Wednesday evening.\n\n* IMPACTS...There is an increased risk of drowning. Rip currents\ncan pull swimmers out to sea. Waves can wash people off beaches\nand rocks, and capsize small boats nearshore.",
+       "certainty":"Likely",
+       "severity":"Moderate",
+       "banner_headline":"Beach Hazards Statement"
+    }
+ ]

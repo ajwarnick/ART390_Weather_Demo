@@ -1,1 +1,65 @@
-{ "sunrise": { "hour": 7, "minute": "50", "seconds": "48", "ampm": "am", "time": "7:50" }, "sunset": { "hour": 6, "minute": "29", "seconds": "30", "ampm": "am", "time": "6:29" }, "description_main": "Clear", "icon": "skc", "temp": { "current": 28, "heatIndex": 32, "windChill": 32, "unit": "F" }, "wind": { "speed": 0, "gust": 0, "unit": "mph", "angle": 0, "direction": "N" }, "precipitation": { "lasthour": 0, "threehours": 0, "sixhours": 0, "unit": "in" }, "dewpoint": 23, "pressure": { "seaLevel": "409.70", "barometric": "409.40", "unit": "in" }, "visibility": 10, "visibilityUnit": "mi", "humidity": 81, "humidityUnit": "%" } 
+{
+	"sunrise": {
+		"hour": 8,
+		"minute": "16",
+		"seconds": "54",
+		"ampm": "am",
+		"time": "8:16"
+	},
+	"sunset": {
+		"hour": 6,
+		"minute": "57",
+		"seconds": "32",
+		"ampm": "am",
+		"time": "6:57"
+	},
+	"description_main": "Fog/Mist",
+	"icon": "fog",
+	"temp": {
+		"current": 55,
+		"heatIndex": 32,
+		"windChill": 32,
+		"unit": "F"
+	},
+	"wind": {
+		"speed": 3,
+		"gust": 0,
+		"unit": "mph",
+		"angle": 10,
+		"direction": "N"
+	},
+	"precipitation": {
+		"lasthour": 0,
+		"threehours": 0,
+		"sixhours": 0,
+		"unit": "in"
+	},
+	"dewpoint": 51,
+	"pressure": {
+		"seaLevel": "408.90",
+		"barometric": "408.90",
+		"unit": "in"
+	},
+	"visibility": 3,
+	"visibilityUnit": "mi",
+	"humidity": 89,
+	"humidityUnit": "%",
+	"air_quality": {
+		"name": "PM2.5",
+		"aqi": 97,
+		"range": 2,
+		"discription": "Moderate",
+		"details": [{
+			"name": "PM2.5",
+			"aqi": 97,
+			"range": 2,
+			"discription": "Moderate"
+		}, {
+			"name": "O3",
+			"aqi": 11,
+			"range": 1,
+			"discription": "Good"
+		}]
+	},
+	"uv": 0
+}
