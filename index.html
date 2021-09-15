@@ -13,7 +13,7 @@
     </head>
 
     <body>
-        <div class="results" id="app">
+        <div class="results" id="app" data-default-zip="90210">
             <input placeholder="Enter Your ZIP Code" v-on:input="zip_trigger" name="name" id="zip" />
   
             
@@ -21,16 +21,17 @@
             <p v-bind:class="time.day">{{time.day}}</p>
             <p class="date">{{time.date}}</p>
             <p class="time">{{time.hour_12}}:{{time.minute}}:{{time.seconds}} {{time.ampm}}</p>
-            <p v-bind:class="time.moom">{{time.moom}}</p>
+            <p v-bind:class="time.moom.class">{{time.moom.name}}</p>
             <p>{{ time.timezone }}</p>
   
             <h1>META</h1>
-            <p class="city">{{city}}</p>
+            
   
             <p class="zip">{{location.zip}}</p>
             <p class="latitude">{{location.coord.lat}}</p>
             <p class="longitude">{{location.coord.lon}}</p>
-            <p class="city">{{location.name}}</p>
+            <p class="city">{{location.city}}</p>
+            <!-- <p class="city">{{location.name}}</p> -->
             <p class="state">{{location.state}}</p>
   
             <p>{{error}}</p>      
@@ -50,7 +51,11 @@
             <h1>CURRENT</h1>
             <p class="description">{{current.description_main}}</p>
             <p class="description_long">{{current.description_long}}</p>
-            <p class="icon">{{current.description_icon}}</p>
+            
+            <p class="icon">{{current.icon}}</p>
+            <div class="icon"  v-if="current.icon" >
+                <img v-bind:src="'https://raw.githubusercontent.com/ajwarnick/ART390_Weather_Demo/master/icons/' + current.icon + '.png'"  v-bind:alt="current.description_main">
+            </div>
   
             <p class="degree_symbol current">{{current.temp.current}}</p>
             <p class="degree_symbol high">{{current.temp.high}}</p>
@@ -59,40 +64,42 @@
             <p class="degree_symbol feelslike">{{current.temp.feelslike}}</p>
             <p class="windspeed">{{current.wind.speed}}</p>
             <p class="cloudcover">{{current.cloud_cover}}</p>
-  
+            
             <p class="rain">{{current.rain}}</p>
             <p class="snow">{{current.snow}}</p>
   
             <p class="pressure">{{current.pressure.barometric}} {{current.pressure.unit}}</p>
             <p class="pressure">{{current.pressure.seaLevel}} {{current.pressure.unit}}</p>
             <p class="humidity">{{current.humidity}}</p>
-  
+            <p class="dewpoint">{{current.dewpoint}}</p>
             <p class="sunrise">{{current.sunrise}}</p>
             <p class="sunset">{{current.sunset}}</p>
   
             <p class="uv">{{current.uv}}</p>
+
+            <h4>Air Quality</h4>
+            <p class="air_quality">{{current.air_quality.name}} : {{current.air_quality.aqi}} - {{current.air_quality.discription}}</p>
+            <h5>JSON Object</h5>
             <p class="air_quality">{{current.air_quality}}</p>
-  
-  
   
   
   
             <h1>HOURLY</h1>
             <h4>Hour 1</h4>
-            <p>{{hourly[0].isDaytime ? 'Day' : 'Night' }}</p>
-            <p>{{hourly[0].time}}</p>
-            <p>{{hourly[0].number}}</p>
-            <p>{{hourly[0].shortForecast}}</p>
-            <p>{{hourly[0].startTime}}</p>
-            <p class="degree_symbol">{{hourly[0].temperature}}</p>
-            <p>{{hourly[0].temperatureTrend}}</p>
-            <p>{{hourly[0].windSpeed}}</p>
-            <p>{{hourly[0].windDirection}}</p>
+            <p>{{hourly[1].isDaytime ? 'Day' : 'Night' }}</p>
+            <p>{{hourly[1].time}}</p>
+            <p>{{hourly[1].number}}</p>
+            <p>{{hourly[1].shortForecast}}</p>
+            <p>{{hourly[1].startTime}}</p>
+            <p class="degree_symbol">{{hourly[1].temperature}}</p>
+            <p>{{hourly[1].temperatureTrend}}</p>
+            <p>{{hourly[1].windSpeed}}</p>
+            <p>{{hourly[1].windDirection}}</p>
   
             <h1>FORECAST</h1>
             <h4>Day 1</h4>
             <h6>{{forecast[0].weekday}}</h6>
-            <p>{{forecast[0].moon}}</p>
+            <p v-bind:class="forecast[0].moon.class">{{forecast[0].moon.name}}</p>
             
             <p  class="degree_symbol">High - {{forecast[0].max_temp}}</p>
             <p  class="degree_symbol">Low - {{forecast[0].min_temp}}</p>
@@ -101,15 +108,14 @@
             <p>{{ forecast[0].uv }}</p>
             <p>{{ forecast[0].weather.description }}</p>
   
-            <p>{{forecast[0].description_icon}}</p>
+            <p>{{forecast[0].icon}}</p>
   
-  
-            <div class="icon">
-                <img v-bind:src="'/img/' + forecast[0].description_icon + '.png'" 
-                v-bind:alt="forecast[0].weather.description">
+            
+            <div class="icon"  v-if="forecast[0].icon" >
+                <img v-bind:src="'https://raw.githubusercontent.com/ajwarnick/ART390_Weather_Demo/master/icons/' + forecast[0].icon + '.png'"  v-bind:alt="forecast[0].weather.description">
             </div>
   
-            <div v-bind:class="'icon_'+forecast[0].description_icon" class="red"></div>
+            <div v-bind:class="'icon_'+forecast[0].icon" class="red"></div>
   
             <p>{{forecast[0].wind_spd}} mph</p>
             <p>{{forecast[0].wind_cdir_full}}</p>
@@ -125,19 +131,6 @@
   
             <p>{{forecast[0].dewpt}}</p>
             <p>{{forecast[0].pres}} mb</p>
-  
-            <div class="icon_01d "></div>
-            <div class="icon_02d "></div>
-            <div class="icon_03d "></div>
-            <div class="icon_04d "></div>
-            <div class="icon_09d "></div>
-            <div class="icon_10d "></div>
-            <div class="icon_11d "></div>
-            <div class="icon_13d "></div>
-            <div class="icon_50d "></div>
-            <div>
-                <img src="/img/03d.png" alt="">
-            </div>
 
             <div class="fullObjects">
                 <h1>TIME</h1>
@@ -147,7 +140,7 @@
                 {{location}}
 
                 <h1>ALERT</h1>
-                {{alerts}}
+                {{alert}}
 
                 <h1>CURRENT</h1>
                 {{current}}
